@@ -46,4 +46,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
 
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    //cookie持久化
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 }

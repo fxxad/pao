@@ -1,6 +1,7 @@
 package com.fxx.pao.net;
 
 import com.fxx.pao.model.BaseMsgModel;
+import com.fxx.pao.model.MyProfileModel;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,7 +33,7 @@ public interface UserApi {
     Call<ResponseBody> loginOld(@Field("userid") String userid, @Field("pwd") String pwd);
 
     @GET("/checklogin.php")
-    Call<BaseMsgModel> checkLogin();
+    Call<MyProfileModel> checkLogin();
 
     /**
      * 退出登录

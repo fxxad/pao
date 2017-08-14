@@ -1,5 +1,8 @@
 package com.fxx.pao.net;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.fxx.pao.PaoApp;
 
 import java.util.concurrent.TimeUnit;
@@ -29,7 +32,12 @@ public class RetrofitHelper {
         //缓存
         Cache cache = new Cache(PaoApp.getInstance().getCacheDir(),1024*1024*10);
 
+        PersistentCookieJar persistentCookieJar =new PersistentCookieJar(
+                new SetCookieCache(),new SharedPrefsCookiePersistor(PaoApp.getInstance())
+        );
+
         okhttpClient = new OkHttpClient.Builder()
+                .cookieJar(persistentCookieJar)
                 .addInterceptor(httpLoggingInterceptor)
                 .cache(cache)
                 .connectTimeout(20, TimeUnit.SECONDS)
