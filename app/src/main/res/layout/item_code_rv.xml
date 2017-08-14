@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="105dp"
+    android:background="@drawable/item_touch_bg"
+    android:padding="@dimen/content_padding">
+
+        <ImageView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:scaleType="fitCenter"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_thumb"
+            android:layout_width="54dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:textAppearance="@style/Item_TitleText"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:maxLines="3"
+            android:text="一个搞笑的ANdroid刷辛苦"
+            android:layout_toLeftOf="@+id/iv_thumb"
+            android:layout_below="@+id/tv_title"
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+       <ImageView
+           android:layout_marginLeft="@dimen/content_padding"
+           android:src="@drawable/ic_heart"
+           android:layout_alignParentBottom="true"
+           android:id="@+id/iv_like"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_toRightOf="@+id/iv_like"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_likenum"
+            android:text="@string/zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:src="@drawable/ic_eye"
+            android:layout_toRightOf="@+id/tv_likenum"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/iv_visi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:text="@string/zero"
+            android:layout_toRightOf="@+id/iv_visi"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_visinum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@+id/tv_visinum"
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</RelativeLayout>

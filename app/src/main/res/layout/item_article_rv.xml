@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/item_touch_bg"
+    android:padding="@dimen/content_padding">
+
+        <ImageView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:scaleType="fitCenter"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_thumb"
+            android:layout_width="54dp"
+            android:layout_height="match_parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@drawable/ic_my"
+            android:id="@+id/iv_header"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_toRightOf="@+id/iv_header"
+            android:id="@+id/tv_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_toLeftOf="@+id/iv_thumb"
+            android:layout_below="@+id/iv_header"
+            android:maxLines="2"
+            android:textAppearance="@style/Item_TitleText"
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+       <TextView
+           android:text="@string/like"
+           android:layout_marginLeft="@dimen/content_padding"
+           android:layout_alignParentBottom="true"
+           android:id="@+id/tv_like"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_toRightOf="@+id/tv_like"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_likenum"
+            android:text="@string/zero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@string/comment"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_toRightOf="@+id/tv_likenum"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/content_padding"
+            android:text="@string/zero"
+            android:layout_toRightOf="@+id/tv_comment"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_toRightOf="@+id/tv_comment_num"
+            android:text="@string/praise"
+            android:id="@+id/tv_praise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_toRightOf="@+id/tv_praise"
+        android:text="@string/zero"
+        android:id="@+id/tv_praise_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_toRightOf="@+id/tv_praise_num"
+        android:text="@string/read"
+        android:id="@+id/tv_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_toRightOf="@+id/tv_read"
+        android:text="@string/zero"
+        android:id="@+id/tv_read_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@+id/tv_read_num"
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+</RelativeLayout>

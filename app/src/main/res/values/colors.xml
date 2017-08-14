@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#363f6e</color>
+    <color name="colorPrimaryDark">#363f6e</color>
+    <color name="colorAccent">#29ca3f</color>
+    <color name="arrow_color">#FFFFFF</color>
+
+    <color name="alpha_white">#77FFFFFF</color>
+    <color name="super_light_grey">#FAFAFA</color>
+    <color name="light_grey">#D7D7D7</color>
+    <color name="white">#FFFFFF</color>
+</resources>

@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">泡网</string>
+    <string name="article">文章</string>
+    <string name="code">代码</string>
+    <string name="mine">我的</string>
+    <string name="input_keyword">请输入关键字</string>
+    <string name="zero">0</string>
+    <string name="praise">赞</string>
+
+    <string name="read">阅</string>
+    <string name="comment">评</string>
+    <string name="like">藏</string>
+    <string name="like_full">收藏</string>
+    <string name="message">私信</string>
+    <string name="setup">设置</string>
+    <string name="click_login">点击头像登陆</string>
+
+
+    <string-array name="article_titles">
+        <item>综合资讯</item>
+        <item>安卓开发</item>
+        <item>程序设计</item>
+        <item>前端开发</item>
+        <item>iOS开发</item>
+        <item>数据库</item>
+        <item>开发日志</item>
+        <item>应用推荐</item>
+        <item>每日一站</item>
+    </string-array>
+
+    <string-array name="code_titles">
+        <item>全部</item>
+        <item>安卓开发</item>
+        <item>程序设计</item>
+        <item>前端开发</item>
+        <item>iOS开发</item>
+    </string-array>
+
+</resources>

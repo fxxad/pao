@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_code_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fxx.pao.ui.code.codedetail.CodeDetailActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            android:background="@color/colorPrimary"
+            android:id="@+id/toolbar_code_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
+    
+
+
+    <android.support.v4.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="@dimen/content_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:id="@+id/iv_thumb"
+                    android:layout_width="90dp"
+                    android:layout_height="160dp" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="@dimen/item_title_text_size"
+                    android:layout_toRightOf="@+id/iv_thumb"
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="@dimen/content_padding"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_toRightOf="@+id/iv_thumb"
+                    android:id="@+id/tv_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="@dimen/content_padding"
+                    android:layout_toRightOf="@+id/iv_thumb"
+                    android:layout_below="@+id/tv_size"
+                    android:id="@+id/tv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/tv_category"
+                    android:layout_toRightOf="@+id/iv_thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_marginTop="@dimen/content_padding"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/collection"
+                            android:id="@+id/iv_collection"
+                            android:layout_width="@dimen/select_item_height"
+                            android:layout_height="@dimen/select_item_height" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:text="@string/zero"
+                            android:layout_below="@+id/iv_collection"
+                            android:id="@+id/tv_like_num"
+                            android:layout_width="@dimen/select_item_height"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_marginTop="@dimen/content_padding"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/collection"
+                            android:id="@+id/iv_comment"
+                            android:layout_width="@dimen/select_item_height"
+                            android:layout_height="@dimen/select_item_height" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:text="@string/zero"
+                            android:layout_below="@+id/iv_comment"
+                            android:id="@+id/tv_comment_num"
+                            android:layout_width="@dimen/select_item_height"
+                            android:layout_height="wrap_content" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_marginTop="@dimen/content_padding"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/enter"
+                            android:id="@+id/iv_go_github"
+                            android:layout_width="@dimen/select_item_height"
+                            android:layout_height="@dimen/select_item_height" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:text="@string/zero"
+                            android:layout_below="@+id/iv_go_github"
+                            android:id="@+id/tv_click_num"
+                            android:layout_width="@dimen/select_item_height"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.fxx.pao.view.HtmlTextView
+                android:id="@+id/htv_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

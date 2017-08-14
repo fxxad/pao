@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar_article"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:text="@string/article"
+                android:textAppearance="@style/Toolbar.TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:src="@drawable/selector_search_icon"
+                android:layout_alignParentRight="true"
+                android:id="@+id/iv_search_article"
+                android:scaleType="fitXY"
+                android:layout_width="35dp"
+                android:layout_height="35dp"/>
+
+        </RelativeLayout>
+
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/sliding_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_layout_default_height"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        app:tl_tab_width="@dimen/tab_indicator_long_width"
+        app:tl_indicator_corner_radius="@dimen/tab_indicator_corner_tiny_radius"
+        app:tl_indicator_height="@dimen/tab_indicator_small_height"
+        app:tl_indicator_width="@dimen/tab_indicator_long_width"
+        app:tl_tab_space_equal="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_articlehome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

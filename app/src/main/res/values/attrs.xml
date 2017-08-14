@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HtmlTextView">
+        <attr name="loadingImg" format="reference"/>
+        <attr name="errorImg" format="reference"/>
+        <attr name="defaultWidth" format="reference"/>
+        <attr name="defaultHeight" format="reference"/>
+    </declare-styleable>
+</resources>
