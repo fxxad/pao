@@ -70,4 +70,11 @@ public class RetrofitHelper {
         return createApi(ApiContants.BASE_URL,CodeApi.class);
     }
 
+    /**
+     * 创建UserApi实例并返回
+     * @return UserAPi实例
+     */
+    public static UserApi createUserApi(){
+        return createApi(ApiContants.BASE_URL,UserApi.class);
+    }
 }

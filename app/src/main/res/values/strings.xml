@@ -9,11 +9,15 @@
 
     <string name="read">阅</string>
     <string name="comment">评</string>
+    <string name="comment_full">评论</string>
     <string name="like">藏</string>
     <string name="like_full">收藏</string>
     <string name="message">私信</string>
     <string name="setup">设置</string>
     <string name="click_login">点击头像登陆</string>
+    <string name="login">登录</string>
+    <string name="mail">邮箱</string>
+    <string name="pwd">密码</string>
 
 
     <string-array name="article_titles">

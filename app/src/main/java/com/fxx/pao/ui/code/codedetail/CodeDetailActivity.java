@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.fxx.pao.R;
 import com.fxx.pao.base.BaseActivity;
 import com.fxx.pao.model.CodeDetailModel;
+import com.fxx.pao.ui.comment.CommentActivity;
 import com.fxx.pao.util.GlideUtil;
 import com.fxx.pao.util.Util;
 import com.fxx.pao.view.HtmlTextView;
@@ -139,7 +140,7 @@ public class CodeDetailActivity extends BaseActivity<CodeDetailPresenter> implem
 
                 break;
             case R.id.iv_comment:
-
+                CommentActivity.start(this,mCodeId);
                 break;
             case R.id.iv_go_github:
                 Util.startBrower(this,codeDetailModel.getUrl());

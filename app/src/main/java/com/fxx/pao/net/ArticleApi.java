@@ -3,7 +3,9 @@ package com.fxx.pao.net;
 
 import com.fxx.pao.model.ArticleDetailModel;
 import com.fxx.pao.model.ArticleModel;
+import com.fxx.pao.model.CommentModel;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -30,5 +32,14 @@ public interface ArticleApi {
      */
     @GET("/article_detail.php")
     Call<ArticleDetailModel> getArticleDetail(@Query("id") int id);
+
+    /**
+     * 评论列表
+     * @param id
+     * @param p
+     * @return
+     */
+    @GET("/list_comment.php")
+    Call<CommentModel> getComments(@Query("id") int id, @Query("p") int p);
 
 }

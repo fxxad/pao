@@ -1,8 +1,16 @@
 package com.fxx.pao.ui.mine;
 
+import android.view.View;
+import android.widget.ImageView;
+
 import com.fxx.pao.R;
 import com.fxx.pao.base.BaseFragment;
 import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.ui.login.LoginActivity;
+import com.fxx.pao.ui.login.LoginContract;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 我的
@@ -10,6 +18,9 @@ import com.fxx.pao.base.BasePresenter;
  */
 
 public class MineHomeFragment extends BaseFragment{
+
+    @BindView(R.id.iv_head)
+    ImageView mIvHead;
 
     @Override
     public BasePresenter getmPresenter() {
@@ -39,5 +50,15 @@ public class MineHomeFragment extends BaseFragment{
     @Override
     public void loadData() {
 
+    }
+
+    @OnClick({R.id.iv_head,R.id.tv_nick})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.iv_head:
+            case R.id.tv_nick:
+                LoginActivity.start(getContext());
+                break;
+        }
     }
 }

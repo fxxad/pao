@@ -23,7 +23,7 @@
             android:layout_centerInParent="true"
             android:src="@drawable/ic_default_head"
             android:scaleType="fitCenter"
-            android:id="@+id/iv_avator"
+            android:id="@+id/iv_head"
             android:layout_width="50dp"
             android:layout_height="50dp" />
 
@@ -31,7 +31,7 @@
             android:layout_marginTop="@dimen/content_padding"
             android:textColor="@android:color/white"
             android:text="@string/click_login"
-            android:layout_below="@+id/iv_avator"
+            android:layout_below="@+id/iv_head"
             android:layout_centerHorizontal="true"
             android:id="@+id/tv_nick"
             android:layout_width="wrap_content"
