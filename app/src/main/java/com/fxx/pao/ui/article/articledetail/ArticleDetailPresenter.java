@@ -3,6 +3,7 @@ package com.fxx.pao.ui.article.articledetail;
 
 
 import com.fxx.pao.model.ArticleDetailModel;
+import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.net.RetrofitHelper;
 
 import java.io.EOFException;
@@ -25,6 +26,7 @@ public class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
 
     private ArticleDetailContract.View mView;
 
+    private ArticleDetailModel articleDetailModel;
     @Override
     public void setView(ArticleDetailContract.View view) {
         mView =view;
@@ -41,7 +43,8 @@ public class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
             @Override
             public void onResponse(Call<ArticleDetailModel> call, Response<ArticleDetailModel> response) {
                 if(response.isSuccessful()){
-                    mView.onGetArticleDetailSuccess(response.body());
+                    articleDetailModel = response.body();
+                    mView.onGetArticleDetailSuccess(articleDetailModel);
                 }else{
                     try {
                         mView.onGetArticleDetailFail(response.errorBody().string());
@@ -70,5 +73,30 @@ public class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
                 }
             }
         });
+    }
+
+    @Override
+    public void followUser(int userId) {
+        RetrofitHelper.createUserApi().followUser(userId).enqueue(new Callback<BaseMsgModel>() {
+            @Override
+            public void onResponse(Call<BaseMsgModel> call, Response<BaseMsgModel> response) {
+                if(response.isSuccessful()){
+                    mView.onFollowSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseMsgModel> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public ArticleDetailModel getArticleDetailModel() {
+        return articleDetailModel;
+    }
+
+    public void setArticleDetailModel(ArticleDetailModel articleDetailModel) {
+        this.articleDetailModel = articleDetailModel;
     }
 }

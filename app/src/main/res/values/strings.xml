@@ -25,6 +25,7 @@
     <string name="no_data">还没有数据哦~</string>
     <string name="logout">退出登录</string>
     <string name="no_signature">还没有签名哦</string>
+    <string name="try_later">请稍后再试</string>
 
 
     <string-array name="article_titles">

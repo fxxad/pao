@@ -9,7 +9,12 @@ import android.widget.Toast;
 
 import com.fxx.pao.R;
 import com.fxx.pao.base.BaseActivity;
+import com.fxx.pao.event.LoginSuccessEvent;
 import com.fxx.pao.model.BaseMsgModel;
+
+import org.greenrobot.eventbus.EventBus;
+
+import javax.security.auth.login.LoginException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -71,7 +76,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public void loginSuccess(BaseMsgModel msgModel) {
         if(msgModel.getSucess() == 1){//登录成功
-            //TODO 通知minefragment刷新个人信息
+            //通知minefragment刷新个人信息
+            EventBus.getDefault().post(new LoginSuccessEvent());
             Toast.makeText(this,"登录成功",Toast.LENGTH_SHORT).show();
             finish();
         }

@@ -62,4 +62,11 @@ public interface UserApi {
     @GET("/my_stow.php")
     Call<CollectionModel> collectionArticle(@Query("p") int p, @Query("c") int c);
 
+    /**
+     * 关注
+     * @param userId 用户id
+     * @return
+     */
+    @GET("/social.php?action=follow")
+    Call<BaseMsgModel> followUser(@Query("id") int userId);
 }

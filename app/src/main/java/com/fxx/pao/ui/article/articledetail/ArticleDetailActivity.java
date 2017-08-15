@@ -7,14 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fxx.pao.R;
 import com.fxx.pao.base.BaseActivity;
 import com.fxx.pao.model.ArticleDetailModel;
+import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.util.GlideUtil;
 import com.fxx.pao.view.HtmlTextView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -87,6 +90,21 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     }
 
+    @Override
+    public void onFollowSuccess(BaseMsgModel baseMsgModel) {
+        if(baseMsgModel.getSucess()==1){
+            Toast.makeText(this,baseMsgModel.getMessage(),Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            Toast.makeText(this,baseMsgModel.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onFollowFail(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * 初始化作者信息
      * @param nickName 昵称
@@ -105,5 +123,20 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
                 break;
         }
         return true;
+    }
+
+    @OnClick({R.id.tv_follow})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.tv_follow:
+                if(mPresenter.getArticleDetailModel()!=null){
+                    mPresenter.followUser(mPresenter.getArticleDetailModel().getUser().getId());
+                }else{
+                    Toast.makeText(this, R.string.try_later,Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

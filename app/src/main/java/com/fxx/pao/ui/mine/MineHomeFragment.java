@@ -11,12 +11,17 @@ import android.widget.Toast;
 
 import com.fxx.pao.R;
 import com.fxx.pao.base.BaseFragment;
+import com.fxx.pao.event.LoginSuccessEvent;
 import com.fxx.pao.model.MyProfileModel;
 import com.fxx.pao.net.RetrofitHelper;
 import com.fxx.pao.ui.login.LoginActivity;
 import com.fxx.pao.ui.mine.myarticle.MyArticleActivity;
 import com.fxx.pao.ui.mine.mycollection.MyCollectionActivity;
 import com.fxx.pao.util.GlideUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
@@ -69,6 +74,7 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadData();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -84,6 +90,12 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
     @Override
     public void loadData() {
         mPresenter.myProfile();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @OnClick({R.id.iv_head,R.id.tv_nick,R.id.rl_article,R.id.rl_collection,R.id.rl_msg,R.id.rl_set,
@@ -173,5 +185,10 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
         mTvFans.setText(R.string.zero);
         mTvAttention.setText(R.string.zero);
         mBtLogout.setVisibility(View.GONE);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMsgEvent(LoginSuccessEvent loginSuccessEvent){
+        mPresenter.myProfile();
     }
 }

@@ -1,7 +1,8 @@
 package com.fxx.pao.model;
 
 /**
- * Created by mc on 2017/8/13.
+ *
+ * Created by fxx on 2017/8/13.
  */
 
 public class ArticleDetailModel {
