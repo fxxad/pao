@@ -18,6 +18,13 @@ import retrofit2.http.Query;
 public interface ArticleApi {
 
     /**
+     * 轮播
+     * @return
+     */
+    @GET("/slider.php")
+    Call<ArticleModel> slideArticles();
+
+    /**
      * 文章列表
      * @param p 分页数
      * @return
@@ -41,5 +48,15 @@ public interface ArticleApi {
      */
     @GET("/list_comment.php")
     Call<CommentModel> getComments(@Query("id") int id, @Query("p") int p);
+
+
+    /**
+     * 文章搜索
+     * @param key 关键词
+     * @param p 分页数
+     * @return
+     */
+    @GET("/article_list.php")
+    Call<ArticleModel> getSearchArticles(@Query("key") String key,@Query("p") int p);
 
 }

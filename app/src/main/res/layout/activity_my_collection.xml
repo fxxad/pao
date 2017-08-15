@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_my_collection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fxx.pao.ui.mine.mycollection.MyCollectionActivity">
+
+    <android.support.v7.widget.Toolbar
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        android:background="@color/colorPrimary"
+        app:title="@string/collection"
+        android:id="@+id/toolar_collection"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"/>
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/stl_collection"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_layout_default_height"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        app:tl_tab_width="@dimen/tab_indicator_long_width"
+        app:tl_indicator_corner_radius="@dimen/tab_indicator_corner_tiny_radius"
+        app:tl_indicator_height="@dimen/tab_indicator_small_height"
+        app:tl_indicator_width="@dimen/tab_indicator_long_width"
+        app:tl_tab_space_equal="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_collection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

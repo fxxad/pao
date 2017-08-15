@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * application
@@ -20,6 +21,7 @@ public class PaoApp extends Application{
         super.onCreate();
         instance=this;
         initImageLoader();
+        LeakCanary.install(this);
     }
 
     /**

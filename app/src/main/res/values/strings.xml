@@ -18,6 +18,13 @@
     <string name="login">登录</string>
     <string name="mail">邮箱</string>
     <string name="pwd">密码</string>
+    <string name="fans">粉丝</string>
+    <string name="attention">关注</string>
+    <string name="my_article">我的文章</string>
+    <string name="collection">收藏</string>
+    <string name="no_data">还没有数据哦~</string>
+    <string name="logout">退出登录</string>
+    <string name="no_signature">还没有签名哦</string>
 
 
     <string-array name="article_titles">
@@ -38,6 +45,11 @@
         <item>程序设计</item>
         <item>前端开发</item>
         <item>iOS开发</item>
+    </string-array>
+
+    <string-array name="collection">
+        <item>文章</item>
+        <item>代码</item>
     </string-array>
 
 </resources>

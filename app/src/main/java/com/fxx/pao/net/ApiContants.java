@@ -29,4 +29,9 @@ public class ApiContants {
     //开发日志
     public static final int TID_DEVLOG=15;
 
+    public static final int COLLECTION_ARTICLE=1;
+    public static final int COLLECTION_CODE=-19;
+
+
+
 }

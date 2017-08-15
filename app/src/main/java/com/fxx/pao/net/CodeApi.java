@@ -31,4 +31,7 @@ public interface CodeApi {
     @GET("/code_detail.php")
     Call<CodeDetailModel> getCodeDetail(@Query("id") int id);
 
+
+    @GET("/code_list.php")
+    Call<CodeModel> getSearchCode(@Query("p") int p,@Query("cate") int cate,@Query("key") String key);
 }

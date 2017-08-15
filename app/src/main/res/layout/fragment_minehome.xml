@@ -20,7 +20,8 @@
         android:layout_height="150dp">
 
         <ImageView
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:src="@drawable/ic_default_head"
             android:scaleType="fitCenter"
             android:id="@+id/iv_head"
@@ -37,9 +38,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:layout_marginTop="@dimen/content_padding"
+            android:textColor="@android:color/white"
+            android:id="@+id/tv_signature"
+            android:layout_below="@+id/tv_nick"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_below="@+id/tv_signature"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="@android:color/white"
+                android:text="@string/fans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@android:color/white"
+                android:id="@+id/tv_fans"
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="@dimen/content_padding"
+                android:text="@string/attention"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@android:color/white"
+                android:id="@+id/tv_attention"
+                android:text="@string/zero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_article"
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/item_touch_bg"
@@ -79,6 +125,7 @@
         android:layout_height="1px" />
 
     <RelativeLayout
+        android:id="@+id/rl_collection"
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/item_touch_bg"
@@ -118,6 +165,7 @@
         android:layout_height="1px" />
 
     <RelativeLayout
+        android:id="@+id/rl_msg"
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/item_touch_bg"
@@ -157,6 +205,7 @@
         android:layout_height="1px" />
 
     <RelativeLayout
+        android:id="@+id/rl_set"
         android:clickable="true"
         android:focusable="true"
         android:background="@drawable/item_touch_bg"
@@ -194,5 +243,13 @@
         android:background="@android:color/darker_gray"
         android:layout_width="match_parent"
         android:layout_height="1px" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/bt_logout"
+        android:text="@string/logout"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/select_item_height" />
 
 </LinearLayout>

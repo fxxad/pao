@@ -1,6 +1,8 @@
 package com.fxx.pao.net;
 
+import com.fxx.pao.model.ArticleModel;
 import com.fxx.pao.model.BaseMsgModel;
+import com.fxx.pao.model.CollectionModel;
 import com.fxx.pao.model.MyProfileModel;
 
 import okhttp3.ResponseBody;
@@ -33,7 +35,7 @@ public interface UserApi {
     Call<ResponseBody> loginOld(@Field("userid") String userid, @Field("pwd") String pwd);
 
     @GET("/checklogin.php")
-    Call<MyProfileModel> checkLogin();
+    Call<BaseMsgModel> checkLogin();
 
     /**
      * 退出登录
@@ -46,5 +48,18 @@ public interface UserApi {
     Call<ResponseBody> userProfile(@Query("id") int id);
 
     @GET("/my_profile.php")
-    Call<ResponseBody> myProfile();
+    Call<MyProfileModel> myProfile();
+
+    @GET("/my_blog.php")
+    Call<ArticleModel> myArticle(@Query("p") int p);
+
+    /**
+     * 我的收藏
+     * @param p 分页数
+     * @param c 文章:1 ；代码：-19
+     * @return
+     */
+    @GET("/my_stow.php")
+    Call<CollectionModel> collectionArticle(@Query("p") int p, @Query("c") int c);
+
 }

@@ -12,9 +12,13 @@ import com.fxx.pao.model.MyProfileModel;
 public interface MineHomeContract {
     interface View extends BaseView{
         void hasLogin(MyProfileModel myProfileModel);
+        void getMyProfileFail(String msg);
+        void logoutSuccess();
+        void logoutFailed(String msg);
     }
     interface Presenter extends BasePresenter<View>{
-        void checkLogin();
+        void myProfile();
+        void logOut();
     }
 
 }

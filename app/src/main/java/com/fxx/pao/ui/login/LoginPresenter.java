@@ -1,8 +1,6 @@
 package com.fxx.pao.ui.login;
 
 
-import android.util.Log;
-
 import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.net.RetrofitHelper;
 
@@ -13,7 +11,6 @@ import java.net.ConnectException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,22 +77,5 @@ public class LoginPresenter implements LoginContract.Presenter{
                 }
             }
         });
-
-//        RetrofitHelper.createUserApi().loginOld(count,pwd).enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                try {
-//                    String msg= response.body().string();
-//                    Log.d("xxf",msg);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//            }
-//        });
     }
 }

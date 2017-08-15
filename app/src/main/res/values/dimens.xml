@@ -22,6 +22,7 @@
     <dimen name="card_elevation">5dp</dimen>
 
     <dimen name="item_title_text_size">16sp</dimen>
+    <dimen name="search_keyword_size">15sp</dimen>
 
     <dimen name="select_item_height">45dp</dimen>
 

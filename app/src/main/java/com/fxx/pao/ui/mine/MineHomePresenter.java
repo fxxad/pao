@@ -1,16 +1,16 @@
 package com.fxx.pao.ui.mine;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.View;
-
+import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.model.MyProfileModel;
 import com.fxx.pao.net.RetrofitHelper;
 
+import java.io.EOFException;
 import java.io.IOException;
+import java.net.BindException;
+import java.net.ConnectException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +23,7 @@ import retrofit2.Response;
 public class MineHomePresenter implements MineHomeContract.Presenter{
 
     private MineHomeContract.View mView;
+    private MyProfileModel myProfileModel;
 
     @Override
     public void setView(MineHomeContract.View view) {
@@ -34,36 +35,64 @@ public class MineHomePresenter implements MineHomeContract.Presenter{
             mView = null;
     }
 
-
-
     @Override
-    public void checkLogin() {
-//        RetrofitHelper.createUserApi().checkLogin().enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                try {
-//                    String msg= response.body().string();
-//                    Log.d("xxf",msg);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//            }
-//        });
-        RetrofitHelper.createUserApi().checkLogin().enqueue(new Callback<MyProfileModel>() {
+    public void myProfile() {
+        RetrofitHelper.createUserApi().myProfile().enqueue(new Callback<MyProfileModel>() {
             @Override
             public void onResponse(Call<MyProfileModel> call, Response<MyProfileModel> response) {
                 if(response.isSuccessful()){
-                    mView.hasLogin(response.body());
+                    myProfileModel = response.body();
+                    mView.hasLogin(myProfileModel);
+                }else{
+                    try {
+                        mView.getMyProfileFail(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<MyProfileModel> call, Throwable t) {
+                if (t instanceof SocketTimeoutException) {
+                    mView.getMyProfileFail("连接超时");
+                } else if (t instanceof SocketException) {
+                    if (t instanceof ConnectException) {
+                        mView.getMyProfileFail("网络未连接");
+                    } else if(t instanceof BindException){
+                        mView.getMyProfileFail("网络错误,端口被占用");
+                    } else{
+                        mView.getMyProfileFail("网络错误");
+                    }
+                }else if(t instanceof EOFException){
+                    mView.getMyProfileFail("连接丢失");
+                }else{
+                    mView.getMyProfileFail("未知错误");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void logOut() {
+        RetrofitHelper.createUserApi().logout().enqueue(new Callback<BaseMsgModel>() {
+            @Override
+            public void onResponse(Call<BaseMsgModel> call, Response<BaseMsgModel> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getSucess()==1){
+                        mView.logoutSuccess();
+                    }else{
+                        try {
+                            mView.logoutFailed(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseMsgModel> call, Throwable t) {
 
             }
         });

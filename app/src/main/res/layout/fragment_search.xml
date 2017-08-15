@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <android.support.v7.widget.Toolbar
+       android:background="@color/colorPrimary"
+       android:id="@+id/toolbar_search_article"
+       android:layout_width="match_parent"
+       android:layout_height="?actionBarSize">
+
+       <LinearLayout
+           android:layout_marginRight="@dimen/activity_vertical_margin"
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <ImageView
+               android:src="@drawable/md_nav_back"
+               android:layout_gravity="center_vertical"
+               android:id="@+id/iv_back"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+
+           <EditText
+               android:textSize="@dimen/search_keyword_size"
+               android:gravity="center_vertical"
+               android:textColorHint="@android:color/white"
+               android:hint="@string/input_keyword"
+               android:singleLine="true"
+               android:maxLines="1"
+               android:textColor="@android:color/white"
+               android:id="@+id/et_keyword"
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="match_parent" />
+
+
+           <ImageView
+               android:scaleType="fitCenter"
+               android:layout_gravity="center_vertical"
+               android:src="@drawable/ic_action_search_dark"
+               android:id="@+id/iv_search"
+               android:layout_width="30dp"
+               android:layout_height="30dp" />
+       </LinearLayout>
+
+   </android.support.v7.widget.Toolbar>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

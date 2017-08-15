@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_search"
     android:layout_width="match_parent"
@@ -7,42 +7,4 @@
     android:orientation="vertical"
     tools:context="com.fxx.pao.ui.search.SearchActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="?android:actionBarSize">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:hint="@string/input_keyword"
-                android:inputType="text"
-                android:id="@+id/et_keyword"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:src="@android:drawable/ic_input_delete"
-                android:id="@+id/iv_clear"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:src="@android:drawable/ic_menu_search"
-                android:id="@+id/iv_search"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-    </android.support.v7.widget.Toolbar>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-</LinearLayout>
+</FrameLayout>

@@ -22,7 +22,9 @@
         <activity android:name=".ui.code.codedetail.CodeDetailActivity" />
         <activity android:name=".ui.article.articledetail.ArticleDetailActivity" />
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.comment.CommentActivity"></activity>
+        <activity android:name=".ui.comment.CommentActivity" />
+        <activity android:name=".ui.mine.myarticle.MyArticleActivity" />
+        <activity android:name=".ui.mine.mycollection.MyCollectionActivity"></activity>
     </application>
 
 </manifest>
