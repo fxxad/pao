@@ -5,6 +5,7 @@ import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.model.CollectionModel;
 import com.fxx.pao.model.MyProfileModel;
 
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,7 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
- *
+ *  账户相关api
  * Created by fxx on 2017/8/14 0014.
  */
 
@@ -32,7 +33,7 @@ public interface UserApi {
 
     @FormUrlEncoded
     @POST("/login.php")
-    Call<ResponseBody> loginOld(@Field("userid") String userid, @Field("pwd") String pwd);
+    Observable<BaseMsgModel> loginRx(@Field("userid") String userid, @Field("pwd") String pwd);
 
     @GET("/checklogin.php")
     Call<BaseMsgModel> checkLogin();
@@ -69,4 +70,20 @@ public interface UserApi {
      */
     @GET("/social.php?action=follow")
     Call<BaseMsgModel> followUser(@Query("id") int userId);
+
+    /**
+     * 收藏
+     * @param id 文章/代码id
+     * @return
+     */
+    @GET("/stow.php")
+    Call<BaseMsgModel> stow(@Query("id") int id);
+
+    /**
+     * 点赞
+     * @param id id
+     * @return
+     */
+    @GET("/upvote.php")
+    Call<BaseMsgModel> praise(@Query("id")  int id);
 }

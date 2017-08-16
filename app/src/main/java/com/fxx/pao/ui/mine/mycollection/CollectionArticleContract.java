@@ -7,7 +7,7 @@ import com.fxx.pao.model.CollectionModel;
 import java.util.List;
 
 /**
- *
+ *  收藏文章协议
  * Created by fxx on 2017/8/15 0015.
  */
 

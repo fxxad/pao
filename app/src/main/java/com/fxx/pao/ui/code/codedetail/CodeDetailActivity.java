@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.fxx.pao.R;
 import com.fxx.pao.base.BaseActivity;
+import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.model.CodeDetailModel;
 import com.fxx.pao.ui.comment.CommentActivity;
 import com.fxx.pao.util.GlideUtil;
@@ -119,6 +120,16 @@ public class CodeDetailActivity extends BaseActivity<CodeDetailPresenter> implem
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void stowSuccess(BaseMsgModel msg) {
+        Toast.makeText(this,msg.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void stowFail(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * 初始化代码详情
      * @param codeDetailModel 详情
@@ -137,7 +148,7 @@ public class CodeDetailActivity extends BaseActivity<CodeDetailPresenter> implem
     public void onClick(View view){
         switch (view.getId()){
             case R.id.iv_collection:
-
+                mPresenter.stow(mCodeId);
                 break;
             case R.id.iv_comment:
                 CommentActivity.start(this,mCodeId);

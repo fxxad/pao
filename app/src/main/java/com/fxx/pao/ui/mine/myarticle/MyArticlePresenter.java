@@ -16,11 +16,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *
+ *  我的文章presenter
  * Created by fxx on 2017/8/15 0015.
  */
 
-public class MyArticlePresenter implements MyArticleContract.Presenter{
+class MyArticlePresenter implements MyArticleContract.Presenter{
 
     private MyArticleContract.View mView;
 

@@ -1,16 +1,13 @@
 package com.fxx.pao.ui.mine.mycollection;
 
-import android.support.v4.view.accessibility.AccessibilityManagerCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.fxx.pao.R;
-import com.fxx.pao.adapter.ArticleRvAdapter;
 import com.fxx.pao.adapter.CollectionRvAdapter;
 import com.fxx.pao.base.BaseFragment;
-import com.fxx.pao.model.ArticleModel;
 import com.fxx.pao.model.CollectionModel;
 import com.fxx.pao.ui.article.articledetail.ArticleDetailActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

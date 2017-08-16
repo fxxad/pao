@@ -7,11 +7,11 @@ import com.fxx.pao.model.CommentModel;
 import java.util.List;
 
 /**
- *
+ *评论协议
  * Created by fxx on 2017/8/14 0014.
  */
 
-public interface CommentContract {
+interface CommentContract {
     interface View extends BaseView{
         void onGetCommentsSuccess(List<CommentModel.ItemsBean> items);
         void onAppendComments(List<CommentModel.ItemsBean> items);

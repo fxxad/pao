@@ -5,11 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.fxx.pao.R;
-import com.fxx.pao.adapter.ArticleRvAdapter;
+import com.fxx.pao.adapter.SyntheticalRvAdapter;
 import com.fxx.pao.base.BaseFragment;
 import com.fxx.pao.model.ArticleModel;
 import com.fxx.pao.ui.article.articledetail.ArticleDetailActivity;
@@ -30,14 +30,17 @@ import butterknife.BindView;
 
 public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticleContract.Presenter>
         implements SyntheticallArticleContract.View, OnRefreshListener,
-        OnLoadmoreListener, ArticleRvAdapter.ItemClickListener {
+        OnLoadmoreListener, SyntheticalRvAdapter.ItemClickListener {
 
     @BindView(R.id.srl)
     SmartRefreshLayout mSrl;
     @BindView(R.id.rv_all_articles)
     RecyclerView mRvAllArticles;
-    private ArticleRvAdapter mAdapter;
+    private SyntheticalRvAdapter mAdapter;
+    //列表数据
     private List<ArticleModel.ItemsBean> mItems;
+    //轮播数据
+    private List<ArticleModel.ItemsBean> mBannerItems;
 
     @Override
     public SyntheticallArticleContract.Presenter getmPresenter() {
@@ -67,12 +70,15 @@ public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticle
 
         mSrl.setOnRefreshListener(this);
         mSrl.setOnLoadmoreListener(this);
+
     }
 
     @Override
     public void initData() {
         mItems = new ArrayList<>();
-        mAdapter = new ArticleRvAdapter(mItems);
+        mBannerItems = new ArrayList<>();
+        mAdapter = new SyntheticalRvAdapter(mItems);
+        mAdapter.setmBannerItems(mBannerItems);
         mAdapter.setmItemClickListener(this);
         mRvAllArticles.setAdapter(mAdapter);
     }
@@ -88,8 +94,7 @@ public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticle
         mItems.clear();
         mItems.addAll(itemsBeen);
         mAdapter.notifyDataSetChanged();
-        if(mSrl.isRefreshing())
-            mSrl.finishRefresh();
+        finishRefresh();
     }
 
     @Override
@@ -97,18 +102,52 @@ public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticle
         int oldNum = mItems.size();
         mItems.addAll(itemsBeen);
         mAdapter.notifyItemRangeChanged(oldNum,itemsBeen.size());
+        finishLoadMore();
+    }
+
+    @Override
+    public void loadArticlesFail(String msg) {
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        if(!finishRefresh())
+            finishLoadMore();
+    }
+
+    /**
+     * 结束刷新动作
+     * @return 是否结束刷新动作
+     */
+    private boolean finishRefresh(){
+        if(mSrl.isRefreshing()) {
+            mSrl.finishRefresh();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 结束加载更多动作
+     */
+    private void finishLoadMore(){
         if(mSrl.isLoading())
             mSrl.finishLoadmore();
     }
 
     @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
+    public void loadBannerDataSuccess(List<ArticleModel.ItemsBean> itemsBeen) {
+        mBannerItems.clear();
+        mBannerItems.addAll(itemsBeen);
         mPresenter.loadInitArticles();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void loadBannerDataFail(String msg) {
+        mPresenter.loadInitArticles();
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
+        mPresenter.loadBannerData();
     }
 
     @Override
@@ -116,7 +155,10 @@ public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticle
         mPresenter.loadMoreArticles();
     }
 
-
+    /**
+     * 列表项点击处理
+     * @param position index
+     */
     @Override
     public void onClick(int position) {
         ArticleDetailActivity.start(getContext(),mItems.get(position).getId()

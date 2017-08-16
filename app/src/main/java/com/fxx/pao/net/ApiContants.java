@@ -32,6 +32,4 @@ public class ApiContants {
     public static final int COLLECTION_ARTICLE=1;
     public static final int COLLECTION_CODE=-19;
 
-
-
 }

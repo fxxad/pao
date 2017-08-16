@@ -7,11 +7,11 @@ import com.fxx.pao.model.CodeModel;
 import java.util.List;
 
 /**
- *
+ *code协议
  * Created by fxx on 2017/8/11 0011.
  */
 
-public interface CodeHomeContract {
+interface CodeHomeContract {
     interface View extends BaseView{
         /**
          * 刷新列表
@@ -23,9 +23,22 @@ public interface CodeHomeContract {
          * @param itemsBeen 新加项
          */
         void appendCodeItems(List<CodeModel.ItemsBean> itemsBeen);
+
+        /**
+         * 加载代码失败
+         * @param msg 错误信息
+         */
+        void loadCodesFail(String msg);
     }
     interface Presenter extends BasePresenter<View> {
+        /**
+         * 加载首屏代码数据
+         */
         void loadInitCodeItems();
+
+        /**
+         * 加载更多
+         */
         void loadMoreCodeItems();
     }
 }

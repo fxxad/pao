@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.fxx.pao.R;
 import com.fxx.pao.adapter.ArticleRvAdapter;
@@ -92,8 +93,7 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
         mItems.clear();
         mItems.addAll(itemsBeen);
         mAdapter.notifyDataSetChanged();
-        if(mSrl.isRefreshing())
-            mSrl.finishRefresh();
+        finishRefresh();
     }
 
     @Override
@@ -101,6 +101,33 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
         int oldNum = mItems.size();
         mItems.addAll(itemsBeen);
         mAdapter.notifyItemRangeChanged(oldNum,itemsBeen.size());
+        finishLoadMore();
+    }
+
+    @Override
+    public void loadArticlesFail(String msg) {
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        if(!finishRefresh())
+            finishLoadMore();
+    }
+
+    /**
+     * 结束刷新动作
+     * @return 是否结束刷新动作
+     */
+    private boolean finishRefresh(){
+        if(mSrl.isRefreshing()) {
+            mSrl.finishRefresh();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 结束加载更多动作
+     */
+    private void finishLoadMore(){
         if(mSrl.isLoading())
             mSrl.finishLoadmore();
     }

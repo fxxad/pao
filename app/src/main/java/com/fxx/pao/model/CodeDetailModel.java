@@ -1,7 +1,7 @@
 package com.fxx.pao.model;
 
 /**
- *
+ *  代码详情model
  * Created by fxx on 2017/8/11 0011.
  */
 

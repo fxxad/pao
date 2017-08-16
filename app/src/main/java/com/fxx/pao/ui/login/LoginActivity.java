@@ -14,7 +14,6 @@ import com.fxx.pao.model.BaseMsgModel;
 
 import org.greenrobot.eventbus.EventBus;
 
-import javax.security.auth.login.LoginException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -80,6 +79,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
             EventBus.getDefault().post(new LoginSuccessEvent());
             Toast.makeText(this,"登录成功",Toast.LENGTH_SHORT).show();
             finish();
+        }else{
+            Toast.makeText(this,msgModel.getMessage(),Toast.LENGTH_SHORT).show();
         }
     }
 

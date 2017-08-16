@@ -16,11 +16,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *
+ *个人主页presenter
  * Created by fxx on 2017/8/14.
  */
 
-public class MineHomePresenter implements MineHomeContract.Presenter{
+class MineHomePresenter implements MineHomeContract.Presenter{
 
     private MineHomeContract.View mView;
     private MyProfileModel myProfileModel;

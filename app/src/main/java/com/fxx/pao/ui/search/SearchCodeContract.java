@@ -12,7 +12,7 @@ import java.util.List;
  * Created by fxx on 2017/8/15 0015.
  */
 
-public interface SearchCodeContract {
+interface SearchCodeContract {
     interface View extends BaseView{
         void onInitSearchCodesSuccess(List<CodeModel.ItemsBean> itemsBeen);
         void onLoadMoreSearchCodes(List<CodeModel.ItemsBean> itemsBeen);

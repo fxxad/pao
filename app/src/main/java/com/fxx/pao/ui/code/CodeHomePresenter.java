@@ -8,16 +8,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *
+ *code presenter
  * Created by fxx on 2017/8/11 0011.
  */
 
-public class CodeHomePresenter implements CodeHomeContract.Presenter{
+class CodeHomePresenter implements CodeHomeContract.Presenter{
 
     private CodeHomeContract.View mView;
 
     /**
-     * 页数
+     * 分页数
      */
     private int mPageIndex=0;
 

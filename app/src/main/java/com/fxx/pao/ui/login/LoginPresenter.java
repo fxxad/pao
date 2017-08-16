@@ -4,6 +4,7 @@ package com.fxx.pao.ui.login;
 import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.net.RetrofitHelper;
 
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.BindException;
@@ -20,7 +21,7 @@ import retrofit2.Response;
  * Created by fxx on 2017/8/14 0014.
  */
 
-public class LoginPresenter implements LoginContract.Presenter{
+class LoginPresenter implements LoginContract.Presenter{
 
     private LoginContract.View mView;
 
@@ -78,4 +79,5 @@ public class LoginPresenter implements LoginContract.Presenter{
             }
         });
     }
+
 }

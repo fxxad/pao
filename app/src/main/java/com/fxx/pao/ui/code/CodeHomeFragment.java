@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.fxx.pao.R;
 import com.fxx.pao.adapter.CodeRvAdapter;
@@ -15,7 +16,6 @@ import com.fxx.pao.base.BaseFragment;
 import com.fxx.pao.model.CodeModel;
 import com.fxx.pao.ui.code.codedetail.CodeDetailActivity;
 import com.fxx.pao.ui.search.SearchActivity;
-import com.fxx.pao.view.SpaceItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -69,7 +69,6 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
     @Override
     public void initView() {
         mRvCodes.setLayoutManager(new LinearLayoutManager(this.getContext()));
-//        mRvCodes.addItemDecoration(new SpaceItemDecoration());
         mRvCodes.addItemDecoration(new DividerItemDecoration(this.getContext(),DividerItemDecoration.VERTICAL));
         mSrl.setOnRefreshListener(this);
         mSrl.setOnLoadmoreListener(this);
@@ -88,41 +87,55 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
         mSrl.autoRefresh();
     }
 
-
     @Override
     public void refreshCodeItems(List<CodeModel.ItemsBean> itemsBeen) {
         mItems.clear();
         mItems.addAll(itemsBeen);
         mAdapter.notifyDataSetChanged();
-
-        if(mSrl.isRefreshing())
-            mSrl.finishRefresh();
+        finishRefresh();
     }
-
 
     @Override
     public void appendCodeItems(List<CodeModel.ItemsBean> itemsBeen) {
         int oldSize=mItems.size();
         mItems.addAll(itemsBeen);
         mAdapter.notifyItemRangeChanged(oldSize,itemsBeen.size());
+        finishLoadMore();
+    }
+    /**
+     * 结束刷新动作
+     * @return 是否结束刷新动作
+     */
+    private boolean finishRefresh(){
+        if(mSrl.isRefreshing()) {
+            mSrl.finishRefresh();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 结束加载更多动作
+     */
+    private void finishLoadMore(){
         if(mSrl.isLoading())
             mSrl.finishLoadmore();
     }
 
-    /**
-     * 上拉加载回调
-     * @param refreshlayout
-     */
+    @Override
+    public void loadCodesFail(String msg) {
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+
+        if(!finishRefresh())
+            finishLoadMore();
+    }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
         mPresenter.loadMoreCodeItems();
     }
 
-    /**
-     * 下拉刷新回调
-     * @param refreshlayout
-     */
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         mPresenter.loadInitCodeItems();

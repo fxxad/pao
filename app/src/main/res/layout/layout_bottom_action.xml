@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_show"
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/select_item_height"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+        android:id="@+id/rl_comment"
+        android:layout_width="@dimen/bottom_action_width"
+        android:layout_height="@dimen/select_item_height">
+
+        <ImageView
+            android:id="@+id/iv_comment"
+            android:layout_alignParentLeft="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:src="@drawable/comment" />
+
+        <TextView
+            android:visibility="gone"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:id="@+id/tv_comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="11dp"
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_marginLeft="-17dp"
+            android:layout_toRightOf="@+id/iv_comment"
+            android:background="@drawable/btn_frame_red_point"
+            android:gravity="center"
+            android:maxHeight="10dp"
+            android:minWidth="13dp"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_toRightOf="@+id/rl_comment"
+        android:id="@+id/rl_collection"
+        android:layout_width="@dimen/bottom_action_width"
+        android:layout_height="@dimen/select_item_height"
+        android:layout_marginLeft="10dp">
+
+        <ImageView
+            android:id="@+id/iv_collection"
+            android:layout_alignParentLeft="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:src="@drawable/collection" />
+
+        <TextView
+            android:visibility="gone"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:id="@+id/tv_collection_num"
+            android:layout_width="wrap_content"
+            android:layout_height="11dp"
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_marginLeft="-17dp"
+            android:layout_toRightOf="@+id/iv_collection"
+            android:background="@drawable/btn_frame_red_point"
+            android:gravity="center"
+            android:maxHeight="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_praise"
+        android:layout_toRightOf="@+id/rl_collection"
+        android:layout_width="@dimen/bottom_action_width"
+        android:layout_height="@dimen/select_item_height"
+        android:layout_marginLeft="10dp">
+
+        <ImageView
+            android:id="@+id/iv_praise"
+            android:layout_alignParentLeft="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:src="@drawable/praise" />
+
+        <TextView
+            android:visibility="gone"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:id="@+id/tv_praise_num"
+            android:layout_width="wrap_content"
+            android:layout_height="11dp"
+            android:layout_marginTop="@dimen/content_padding"
+            android:layout_marginLeft="-17dp"
+            android:layout_toRightOf="@+id/iv_praise"
+            android:background="@drawable/btn_frame_red_point"
+            android:gravity="center"
+            android:maxHeight="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/iv_share"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:clickable="true"
+        android:src="@drawable/share" />
+
+</RelativeLayout>

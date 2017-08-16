@@ -1,78 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.fxx.pao.ui.article.articledetail.ArticleDetailActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <include
+        android:id="@+id/layout_bottom_action"
+        layout="@layout/layout_bottom_action"/>
 
-        <android.support.v7.widget.Toolbar
-            app:layout_scrollFlags="scroll|enterAlways"
-            android:background="@color/colorPrimary"
-            android:id="@+id/toobar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/civ_author_head"
-                    android:layout_centerVertical="true"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp" />
-
-                <TextView
-                    android:textColor="@color/white"
-                    android:layout_marginLeft="@dimen/content_padding"
-                    android:layout_toRightOf="@+id/civ_author_head"
-                    android:id="@+id/tv_author_nick"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:clickable="true"
-                    android:id="@+id/tv_follow"
-                    android:layout_marginRight="@dimen/activity_horizontal_margin"
-                    android:textColor="@android:color/white"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/attention"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
-    <ProgressBar
-        android:visibility="visible"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/pb_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <android.support.v4.widget.NestedScrollView
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:paddingLeft="@dimen/content_padding"
-        android:paddingRight="@dimen/content_padding"
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_above="@+id/layout_bottom_action"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.fxx.pao.view.HtmlTextView
-            android:id="@+id/htv_content"
+
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:background="@color/colorPrimary"
+                android:id="@+id/toobar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_author_head"
+                        android:layout_centerVertical="true"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="@dimen/content_padding"
+                        android:layout_toRightOf="@+id/civ_author_head"
+                        android:id="@+id/tv_author_nick"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:clickable="true"
+                        android:id="@+id/tv_follow"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:textColor="@android:color/white"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/attention"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ProgressBar
+            android:visibility="visible"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </android.support.v4.widget.NestedScrollView>
 
+        <android.support.v4.widget.NestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingLeft="@dimen/content_padding"
+            android:paddingRight="@dimen/content_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</android.support.design.widget.CoordinatorLayout>
+            <com.fxx.pao.view.HtmlTextView
+                android:id="@+id/htv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

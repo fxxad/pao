@@ -106,7 +106,7 @@
                         <ImageView
                             android:layout_marginTop="@dimen/content_padding"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/collection"
+                            android:src="@drawable/comment"
                             android:id="@+id/iv_comment"
                             android:layout_width="@dimen/select_item_height"
                             android:layout_height="@dimen/select_item_height" />

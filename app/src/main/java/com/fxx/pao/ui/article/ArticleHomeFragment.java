@@ -2,8 +2,6 @@ package com.fxx.pao.ui.article;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -33,7 +31,7 @@ public class ArticleHomeFragment extends BaseFragment{
     @BindView(R.id.iv_search_article)
     ImageView mIvSearch;
 
-    private ArticleHomeVpAdapter mAdaper;
+//    private ArticleHomeVpAdapter mAdaper;
 
 
     @Override
@@ -53,8 +51,8 @@ public class ArticleHomeFragment extends BaseFragment{
 
     @Override
     public void initView() {
-        mAdaper = new ArticleHomeVpAdapter(getChildFragmentManager(),this.getContext());
-        mVp.setAdapter(mAdaper);
+        ArticleHomeVpAdapter adapter = new ArticleHomeVpAdapter(getChildFragmentManager(),this.getContext());
+        mVp.setAdapter(adapter);
         mVp.setOffscreenPageLimit(5);
         mSliddeTab.setViewPager(mVp);
     }

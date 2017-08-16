@@ -5,11 +5,11 @@ import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.MyProfileModel;
 
 /**
- *
+ *个人主页协议
  * Created by fxx on 2017/8/14.
  */
 
-public interface MineHomeContract {
+interface MineHomeContract {
     interface View extends BaseView{
         void hasLogin(MyProfileModel myProfileModel);
         void getMyProfileFail(String msg);

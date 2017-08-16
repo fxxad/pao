@@ -6,11 +6,11 @@ import com.fxx.pao.model.ArticleDetailModel;
 import com.fxx.pao.model.BaseMsgModel;
 
 /**
- *
+ *文章详情协议
  * Created by fxx on 2017/8/13.
  */
 
-public interface ArticleDetailContract {
+interface ArticleDetailContract {
     interface View extends BaseView{
         /**
          * 文章详情获取成功
@@ -25,6 +25,14 @@ public interface ArticleDetailContract {
         void onFollowSuccess(BaseMsgModel baseMsgModel);
 
         void onFollowFail(String msg);
+
+        void collectSuccess(BaseMsgModel baseMsgModel);
+
+        void collectFail(String msg);
+
+        void praiseSuccess(BaseMsgModel baseMsgModel);
+
+        void praiseFail(String msg);
     }
     interface Presenter extends BasePresenter<ArticleDetailContract.View>{
         /**
@@ -34,8 +42,20 @@ public interface ArticleDetailContract {
 
         /**
          * 关注
-         * @param userId
+         * @param userId 用户id
          */
         void followUser(int userId);
+
+        /**
+         * 收藏
+         * @param articleId 文章id
+         */
+        void collect(int articleId);
+
+        /**
+         * 点赞
+         * @param articleId 文章id
+         */
+        void praise(int articleId);
     }
 }

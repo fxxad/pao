@@ -11,7 +11,7 @@ import com.fxx.pao.ui.article.synthetical.SyntheticalArticleFragment;
 import com.fxx.pao.ui.article.other.ArticleListFragment;
 
 /**
- *
+ *  文章页ViewPager适配器
  * Created by fxx on 2017/8/10 0010.
  */
 

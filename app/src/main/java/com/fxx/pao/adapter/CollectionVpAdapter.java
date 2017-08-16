@@ -6,14 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.fxx.pao.R;
-import com.fxx.pao.net.ApiContants;
-import com.fxx.pao.ui.article.other.ArticleListFragment;
-import com.fxx.pao.ui.article.synthetical.SyntheticalArticleFragment;
 import com.fxx.pao.ui.mine.mycollection.CollectionArticleFragment;
 import com.fxx.pao.ui.mine.mycollection.CollectionCodeFragment;
 
 /**
- *
+ *  收藏页ViewPager适配器
  * Created by fxx on 2017/8/10 0010.
  */
 

@@ -7,11 +7,11 @@ import com.fxx.pao.model.ArticleModel;
 import java.util.List;
 
 /**
- *
+ *  我的文章协议
  * Created by fxx on 2017/8/15 0015.
  */
 
-public interface MyArticleContract {
+interface MyArticleContract {
     interface View extends BaseView{
         void getMyArticlesSuccess(List<ArticleModel.ItemsBean> itemsBeen);
         void appendMyArticles(List<ArticleModel.ItemsBean> itemsBeen);

@@ -17,11 +17,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *
+ *评论presenter
  * Created by fxx on 2017/8/14 0014.
  */
 
-public class CommentPresenter implements CommentContract.Presenter{
+class CommentPresenter implements CommentContract.Presenter{
     private CommentContract.View mView;
 
     private int p;

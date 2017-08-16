@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- *
+ *RecyclerView代码列表适配器
  * Created by fxx on 2017/8/10 0010.
  */
 
@@ -39,8 +39,8 @@ public class CodeRvAdapter extends RecyclerView.Adapter<CodeRvAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.mTvTitle.setText(mItems.get(position).getTitle());
         holder.mTvDesc.setText(mItems.get(position).getDescribe());
-        holder.mTvLileNum.setText(""+mItems.get(position).getStow());
-        holder.mTvVisiNum.setText(""+mItems.get(position).getClick());
+        holder.mTvLileNum.setText(String.valueOf(mItems.get(position).getStow()));
+        holder.mTvVisiNum.setText(String.valueOf(mItems.get(position).getClick()));
         holder.mTvDate.setText(mItems.get(position).getPubDate());
         GlideUtil.loadDefaultImage(mItems.get(position).getThumbnail()).into(holder.mIvThumb);
         setClickListener(holder,position);

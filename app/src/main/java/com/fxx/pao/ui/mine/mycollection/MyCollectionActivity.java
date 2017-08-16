@@ -12,9 +12,6 @@ import com.fxx.pao.R;
 import com.fxx.pao.adapter.CollectionVpAdapter;
 import com.fxx.pao.base.BaseActivity;
 import com.fxx.pao.base.BasePresenter;
-import com.fxx.pao.model.ArticleModel;
-
-import java.util.List;
 
 import butterknife.BindView;
 

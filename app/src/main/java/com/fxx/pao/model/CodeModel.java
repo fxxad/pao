@@ -3,6 +3,7 @@ package com.fxx.pao.model;
 import java.util.List;
 
 /**
+ * 代码列表model
  * Created by Administrator on 2017/8/10 0010.
  */
 

@@ -1,7 +1,7 @@
 package com.fxx.pao.model;
 
 /**
- *
+ *  个人信息model
  * Created by fxx on 2017/8/14.
  */
 

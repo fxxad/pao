@@ -3,7 +3,6 @@ package com.fxx.pao.ui.search;
 import com.fxx.pao.base.BasePresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.ArticleModel;
-import com.fxx.pao.model.CodeModel;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * Created by fxx on 2017/8/15 0015.
  */
 
-public interface SearchArticleContract {
+interface SearchArticleContract {
     interface View extends BaseView{
         void onInitSearchArticlesSuccess(List<ArticleModel.ItemsBean> itemsBeen);
         void onLoadMoreSearchArticles(List<ArticleModel.ItemsBean> itemsBeen);

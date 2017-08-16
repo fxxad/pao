@@ -38,6 +38,12 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
     TextView mTvAuthorNick;
     @BindView(R.id.pb_loading)
     ProgressBar mPbLoading;
+    @BindView(R.id.tv_comment_num)
+    TextView mTvCommentNum;
+    @BindView(R.id.tv_collection_num)
+    TextView mTvCollectionNum;
+    @BindView(R.id.tv_praise_num)
+    TextView mTvPraiseNum;
 
     public static void start(Context context,int articleId,String nickName,String faceUrl){
         Intent intent =new Intent(context,ArticleDetailActivity.class);
@@ -80,9 +86,21 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     @Override
     public void onGetArticleDetailSuccess(ArticleDetailModel articleDetail) {
-        //TODO
         mHtvContent.setRichText(articleDetail.getContent());
         mPbLoading.setVisibility(View.GONE);
+        if(articleDetail.getComments()>0){
+            mTvCommentNum.setText(String.valueOf(articleDetail.getComments()));
+            mTvCommentNum.setVisibility(View.VISIBLE);
+        }
+        if(articleDetail.getStow()>0){
+            mTvCollectionNum.setText(String.valueOf(articleDetail.getStow()));
+            mTvCollectionNum.setVisibility(View.VISIBLE);
+        }
+        if(articleDetail.getUpvote()>0){
+            mTvPraiseNum.setText(String.valueOf(articleDetail.getUpvote()));
+            mTvPraiseNum.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -102,6 +120,26 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     @Override
     public void onFollowFail(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void collectSuccess(BaseMsgModel baseMsgModel) {
+        Toast.makeText(this,baseMsgModel.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void collectFail(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void praiseSuccess(BaseMsgModel baseMsgModel) {
+        Toast.makeText(this,baseMsgModel.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void praiseFail(String msg) {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
@@ -125,7 +163,7 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
         return true;
     }
 
-    @OnClick({R.id.tv_follow})
+    @OnClick({R.id.tv_follow,R.id.iv_comment,R.id.iv_collection,R.id.iv_praise})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.tv_follow:
@@ -134,6 +172,15 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
                 }else{
                     Toast.makeText(this, R.string.try_later,Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.iv_comment:
+                //TODO
+                break;
+            case R.id.iv_collection:
+                mPresenter.collect(mArticleId);
+                break;
+            case R.id.iv_praise:
+                mPresenter.praise(mArticleId);
                 break;
             default:
                 break;

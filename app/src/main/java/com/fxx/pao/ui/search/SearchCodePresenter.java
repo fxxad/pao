@@ -12,7 +12,7 @@ import retrofit2.Response;
  * Created by fxx on 2017/8/15 0015.
  */
 
-public class SearchCodePresenter implements SearchCodeContract.Presenter{
+class SearchCodePresenter implements SearchCodeContract.Presenter{
 
     private SearchCodeContract.View mView;
     private int p;

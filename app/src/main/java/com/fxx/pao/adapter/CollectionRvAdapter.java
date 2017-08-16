@@ -4,11 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fxx.pao.R;
-import com.fxx.pao.model.ArticleModel;
 import com.fxx.pao.model.CollectionModel;
 import com.fxx.pao.util.GlideUtil;
 
@@ -19,7 +17,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- *
+ *收藏列表适配器
  * Created by fxx on 2017/8/10 0010.
  */
 

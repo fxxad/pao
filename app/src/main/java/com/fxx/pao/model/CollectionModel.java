@@ -3,7 +3,7 @@ package com.fxx.pao.model;
 import java.util.List;
 
 /**
- *
+ *  收藏列表model
  * Created by fxx on 2017/8/15 0015.
  */
 

@@ -10,7 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *
+ *  收藏代码presenter
  * Created by fxx on 2017/8/15 0015.
  */
 
@@ -42,7 +42,7 @@ public class CollectionCodePresenter implements CollectionCodeContract.Presenter
 
             @Override
             public void onFailure(Call<CollectionModel> call, Throwable t) {
-
+                //TODO
             }
         });
     }
@@ -59,7 +59,7 @@ public class CollectionCodePresenter implements CollectionCodeContract.Presenter
 
             @Override
             public void onFailure(Call<CollectionModel> call, Throwable t) {
-
+                //TODO
             }
         });
     }

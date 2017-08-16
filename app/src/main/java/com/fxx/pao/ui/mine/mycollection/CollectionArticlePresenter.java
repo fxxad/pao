@@ -5,16 +5,18 @@ import com.fxx.pao.model.CollectionModel;
 import com.fxx.pao.net.ApiContants;
 import com.fxx.pao.net.RetrofitHelper;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *
+ *  收藏文章presenter
  * Created by fxx on 2017/8/15 0015.
  */
 
-public class CollectionArticlePresenter implements CollectionArticleContract.Presenter{
+class CollectionArticlePresenter implements CollectionArticleContract.Presenter{
     private int p;
 
     private CollectionArticleContract.View mView;
@@ -38,12 +40,18 @@ public class CollectionArticlePresenter implements CollectionArticleContract.Pre
             public void onResponse(Call<CollectionModel> call, Response<CollectionModel> response) {
                 if(response.isSuccessful()){
                     mView.getCollectionArticlesSuccess(response.body().getItems());
+                }else{
+                    try {
+                        mView.getCollectionArticlesFail(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<CollectionModel> call, Throwable t) {
-
+                //TODO
             }
         });
     }
@@ -55,12 +63,18 @@ public class CollectionArticlePresenter implements CollectionArticleContract.Pre
             public void onResponse(Call<CollectionModel> call, Response<CollectionModel> response) {
                 if(response.isSuccessful()){
                     mView.appendCollectionArticles(response.body().getItems());
+                }else{
+                    try {
+                        mView.getCollectionArticlesFail(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<CollectionModel> call, Throwable t) {
-
+                //TODO
             }
         });
     }

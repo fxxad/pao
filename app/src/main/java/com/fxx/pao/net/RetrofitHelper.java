@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- *
+ *  Retrofit网络请求类
  * Created by fxx on 2017/8/10 0010.
  */
 
@@ -58,6 +58,7 @@ public class RetrofitHelper {
                 .client(okhttpClient)
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit.create(clazz);
     }

@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 /**
- *
+ *  代码相关api
  * Created by fxx on 2017/8/11 0011.
  */
 

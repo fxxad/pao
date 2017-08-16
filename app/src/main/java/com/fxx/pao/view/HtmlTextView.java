@@ -26,7 +26,7 @@ import java.util.List;
 import static android.R.attr.defaultWidth;
 
 /**
- *
+ *图文混排控件
  * Created by Administrator on 2017/4/25 0025.
  */
 

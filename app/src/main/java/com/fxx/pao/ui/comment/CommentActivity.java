@@ -64,8 +64,9 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         mSrl.setOnRefreshListener(this);
         mSrl.setOnLoadmoreListener(this);
 

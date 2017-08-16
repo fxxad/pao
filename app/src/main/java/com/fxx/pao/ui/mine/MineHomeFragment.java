@@ -2,7 +2,6 @@ package com.fxx.pao.ui.mine;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,7 +12,6 @@ import com.fxx.pao.R;
 import com.fxx.pao.base.BaseFragment;
 import com.fxx.pao.event.LoginSuccessEvent;
 import com.fxx.pao.model.MyProfileModel;
-import com.fxx.pao.net.RetrofitHelper;
 import com.fxx.pao.ui.login.LoginActivity;
 import com.fxx.pao.ui.mine.myarticle.MyArticleActivity;
 import com.fxx.pao.ui.mine.mycollection.MyCollectionActivity;
@@ -23,14 +21,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * 我的
@@ -121,11 +114,8 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
                 }
                 break;
             case R.id.rl_msg:
-                if(isLogin){
-//                    MyCollectionActivity.start(getContext());
-                }else{
-                    LoginActivity.start(getContext());
-                }
+               if(!isLogin)
+                   LoginActivity.start(getContext());
                 break;
             case R.id.rl_set:
                 Toast.makeText(getContext(),"TODO",Toast.LENGTH_SHORT).show();
@@ -169,8 +159,8 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
         GlideUtil.loadHeadImage(myProfileModel.getModel().getFace()).into(mIvHead);
         mTvNick.setText(myProfileModel.getModel().getNickname());
         mTvSignature.setText(myProfileModel.getModel().getQianming());
-        mTvFans.setText(""+myProfileModel.getModel().getFans());
-        mTvAttention.setText(""+myProfileModel.getModel().getGuanzhu());
+        mTvFans.setText(String.valueOf(myProfileModel.getModel().getFans()));
+        mTvAttention.setText(String.valueOf(myProfileModel.getModel().getGuanzhu()));
         mBtLogout.setVisibility(View.VISIBLE);
     }
 
@@ -187,6 +177,10 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
         mBtLogout.setVisibility(View.GONE);
     }
 
+    /**
+     * 处理登录成功消息
+     * @param loginSuccessEvent 消息
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMsgEvent(LoginSuccessEvent loginSuccessEvent){
         mPresenter.myProfile();

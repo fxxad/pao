@@ -1,7 +1,7 @@
 package com.fxx.pao.event;
 
 /**
- *
+ *  登录成功事件类
  * Created by fxx on 2017/8/15.
  */
 

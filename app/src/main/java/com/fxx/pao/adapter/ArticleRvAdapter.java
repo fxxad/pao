@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- *
+ *  RecyclerView文章列表适配器
  * Created by fxx on 2017/8/10 0010.
  */
 
@@ -39,12 +39,12 @@ public class ArticleRvAdapter extends RecyclerView.Adapter<ArticleRvAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.mTvTitle.setText(mItems.get(position).getTitle());
-        holder.mTvLileNum.setText(""+mItems.get(position).getStow());
-        holder.mTvCommentNum.setText(""+mItems.get(position).getComments());
+        holder.mTvLileNum.setText(String.valueOf(mItems.get(position).getStow()));
+        holder.mTvCommentNum.setText(String.valueOf(mItems.get(position).getComments()));
         holder.mTvDate.setText(mItems.get(position).getPubDate());
         holder.mTvNick.setText(mItems.get(position).getUser().getNickname());
-        holder.mTvPraiseNum.setText(""+mItems.get(position).getUpvote());
-        holder.mTvReadNum.setText(""+mItems.get(position).getClick());
+        holder.mTvPraiseNum.setText(String.valueOf(mItems.get(position).getUpvote()));
+        holder.mTvReadNum.setText(String.valueOf(mItems.get(position).getClick()));
         GlideUtil.loadDefaultImage(mItems.get(position).getThumbnail()).into(holder.mIvThumb);
         GlideUtil.loadHeadImage(mItems.get(position).getUser().getFace()).into(holder.mIvHeader);
         setClickListener(holder,position);
