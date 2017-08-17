@@ -8,6 +8,7 @@ import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
+ *
  * Created by RayYeung on 2016/7/11.
  */
 public class ImageLoaderUtils {

@@ -1,23 +1,18 @@
 package com.fxx.pao.ui.login;
 
 
+
 import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.net.RetrofitHelper;
+import com.fxx.pao.util.NetErrorUtil;
 
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.BindException;
-import java.net.ConnectException;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- *
+ * 登录presenter
  * Created by fxx on 2017/8/14 0014.
  */
 
@@ -45,39 +40,20 @@ class LoginPresenter implements LoginContract.Presenter{
             mView.loginFail("密码不能为空");
             return;
         }
-        RetrofitHelper.createUserApi().login(count,pwd).enqueue(new Callback<BaseMsgModel>() {
-            @Override
-            public void onResponse(Call<BaseMsgModel> call, Response<BaseMsgModel> response) {
-                if(response.isSuccessful()){
-                    mView.loginSuccess(response.body());
-                }else{
-                    try {
-                        mView.loginFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createUserApi().login(count,pwd)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<BaseMsgModel>() {
+                    @Override
+                    public void accept(BaseMsgModel baseMsgModel) throws Exception {
+                        mView.loginSuccess(baseMsgModel);
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BaseMsgModel> call, Throwable t) {
-                if (t instanceof SocketTimeoutException) {
-                    mView.loginFail("连接超时");
-                } else if (t instanceof SocketException) {
-                    if (t instanceof ConnectException) {
-                        mView.loginFail("网络未连接");
-                    } else if(t instanceof BindException){
-                        mView.loginFail("网络错误,端口被占用");
-                    } else{
-                        mView.loginFail("网络错误");
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.loginFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                }else if(t instanceof EOFException){
-                    mView.loginFail("连接丢失");
-                }else{
-                    mView.loginFail("未知错误");
-                }
-            }
-        });
+                });
     }
 
 }

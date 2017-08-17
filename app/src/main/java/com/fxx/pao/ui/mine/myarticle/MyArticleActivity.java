@@ -26,6 +26,7 @@ import butterknife.BindView;
 
 /**
  *我的文章
+ * Created by fxx on 2017/8/11
  */
 public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implements MyArticleContract.View, OnRefreshListener, OnLoadmoreListener {
 

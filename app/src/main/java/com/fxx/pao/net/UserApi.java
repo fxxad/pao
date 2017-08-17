@@ -7,7 +7,6 @@ import com.fxx.pao.model.MyProfileModel;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -23,67 +22,69 @@ public interface UserApi {
 
     /**
      * 登录
-     * @param userid
-     * @param pwd
-     * @return
+     * @param userid 账号
+     * @param pwd 密码
      */
     @FormUrlEncoded
     @POST("/login.php")
-    Call<BaseMsgModel> login(@Field("userid") String userid, @Field("pwd") String pwd);
+    Observable<BaseMsgModel> login(@Field("userid") String userid, @Field("pwd") String pwd);
 
-    @FormUrlEncoded
-    @POST("/login.php")
-    Observable<BaseMsgModel> loginRx(@Field("userid") String userid, @Field("pwd") String pwd);
 
     @GET("/checklogin.php")
-    Call<BaseMsgModel> checkLogin();
+    Observable<BaseMsgModel> checkLogin();
 
     /**
      * 退出登录
-     * @return
      */
     @GET("/logout.php")
-    Call<BaseMsgModel> logout();
+    Observable<BaseMsgModel> logout();
 
+    /**
+     * 用户个人信息
+     * @param id 用户id
+     */
     @GET("/user_profile.php")
-    Call<ResponseBody> userProfile(@Query("id") int id);
+    Observable<ResponseBody> userProfile(@Query("id") int id);
 
+    /**
+     * 我的个人信息
+     */
     @GET("/my_profile.php")
-    Call<MyProfileModel> myProfile();
+    Observable<MyProfileModel> myProfile();
 
+    /**
+     * 我的文章
+     * @param p 分页数
+     */
     @GET("/my_blog.php")
-    Call<ArticleModel> myArticle(@Query("p") int p);
+    Observable<ArticleModel> myArticle(@Query("p") int p);
 
     /**
      * 我的收藏
      * @param p 分页数
      * @param c 文章:1 ；代码：-19
-     * @return
      */
     @GET("/my_stow.php")
-    Call<CollectionModel> collectionArticle(@Query("p") int p, @Query("c") int c);
+    Observable<CollectionModel> collectionArticle(@Query("p") int p, @Query("c") int c);
 
     /**
      * 关注
      * @param userId 用户id
-     * @return
      */
     @GET("/social.php?action=follow")
-    Call<BaseMsgModel> followUser(@Query("id") int userId);
+    Observable<BaseMsgModel> followUser(@Query("id") int userId);
 
     /**
      * 收藏
      * @param id 文章/代码id
-     * @return
      */
     @GET("/stow.php")
-    Call<BaseMsgModel> stow(@Query("id") int id);
+    Observable<BaseMsgModel> stow(@Query("id") int id);
 
     /**
      * 点赞
      * @param id id
-     * @return
      */
     @GET("/upvote.php")
-    Call<BaseMsgModel> praise(@Query("id")  int id);
+    Observable<BaseMsgModel> praise(@Query("id")  int id);
 }

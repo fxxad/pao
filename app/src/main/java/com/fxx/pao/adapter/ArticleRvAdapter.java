@@ -45,7 +45,12 @@ public class ArticleRvAdapter extends RecyclerView.Adapter<ArticleRvAdapter.MyVi
         holder.mTvNick.setText(mItems.get(position).getUser().getNickname());
         holder.mTvPraiseNum.setText(String.valueOf(mItems.get(position).getUpvote()));
         holder.mTvReadNum.setText(String.valueOf(mItems.get(position).getClick()));
-        GlideUtil.loadDefaultImage(mItems.get(position).getThumbnail()).into(holder.mIvThumb);
+        if(mItems.get(position).getThumbnail()== null || mItems.get(position).getThumbnail().equals("")){
+            holder.mIvThumb.setVisibility(View.INVISIBLE);
+        }else{
+            holder.mIvThumb.setVisibility(View.VISIBLE);
+            GlideUtil.loadDefaultImage(mItems.get(position).getThumbnail()).into(holder.mIvThumb);
+        }
         GlideUtil.loadHeadImage(mItems.get(position).getUser().getFace()).into(holder.mIvHeader);
         setClickListener(holder,position);
     }

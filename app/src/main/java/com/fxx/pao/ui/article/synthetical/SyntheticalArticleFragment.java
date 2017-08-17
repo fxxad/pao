@@ -1,11 +1,8 @@
 package com.fxx.pao.ui.article.synthetical;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.fxx.pao.R;
@@ -56,11 +53,6 @@ public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticle
     @Override
     public int getLayoutId() {
         return R.layout.fragment_synthetical_article;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

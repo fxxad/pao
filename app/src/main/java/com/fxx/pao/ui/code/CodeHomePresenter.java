@@ -2,10 +2,11 @@ package com.fxx.pao.ui.code;
 
 import com.fxx.pao.model.CodeModel;
 import com.fxx.pao.net.RetrofitHelper;
+import com.fxx.pao.util.NetErrorUtil;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  *code presenter
@@ -34,36 +35,38 @@ class CodeHomePresenter implements CodeHomeContract.Presenter{
     @Override
     public void loadInitCodeItems() {
         mPageIndex = 0;
-        Call<CodeModel> call = RetrofitHelper.createCodeApi().getCodeList(mPageIndex);
-        call.enqueue(new Callback<CodeModel>() {
-            @Override
-            public void onResponse(Call<CodeModel> call, Response<CodeModel> response) {
-                CodeModel codeModel=response.body();
-                mView.refreshCodeItems(codeModel.getItems());
-            }
-
-            @Override
-            public void onFailure(Call<CodeModel> call, Throwable t) {
-
-            }
-        });
+        RetrofitHelper.createCodeApi().getCodeList(mPageIndex)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeModel>() {
+                    @Override
+                    public void accept(CodeModel codeModel) throws Exception {
+                        mView.refreshCodeItems(codeModel.getItems());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.loadCodesFail(NetErrorUtil.handleThrowable(t));
+                    }
+                });
     }
 
     @Override
     public void loadMoreCodeItems(){
-        Call<CodeModel> call = RetrofitHelper.createCodeApi().getCodeList(++mPageIndex);
-        call.enqueue(new Callback<CodeModel>() {
-            @Override
-            public void onResponse(Call<CodeModel> call, Response<CodeModel> response) {
-                CodeModel codeModel=response.body();
-                mView.appendCodeItems(codeModel.getItems());
-            }
-
-            @Override
-            public void onFailure(Call<CodeModel> call, Throwable t) {
-
-            }
-        });
+        RetrofitHelper.createCodeApi().getCodeList(++mPageIndex)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeModel>() {
+                    @Override
+                    public void accept(CodeModel codeModel) throws Exception {
+                        mView.appendCodeItems(codeModel.getItems());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.loadCodesFail(NetErrorUtil.handleThrowable(t));
+                    }
+                });
     }
 
 }

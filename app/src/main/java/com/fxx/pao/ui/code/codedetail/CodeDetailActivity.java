@@ -25,6 +25,7 @@ import butterknife.OnClick;
 
 /**
  * 代码详情页
+ * Created by fxx on 2017/8/
  */
 public class CodeDetailActivity extends BaseActivity<CodeDetailPresenter> implements CodeDetailContract.View{
 
@@ -83,12 +84,15 @@ public class CodeDetailActivity extends BaseActivity<CodeDetailPresenter> implem
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
+        }
     }
 
     @Override
     public void initData() {
-        getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
+
         mCodeId = getIntent().getIntExtra("id",0);
         mPresenter.getCodeDetail(mCodeId);
     }
@@ -139,9 +143,9 @@ public class CodeDetailActivity extends BaseActivity<CodeDetailPresenter> implem
         mTvName.setText(codeDetailModel.getTitle());
         mTvSize.setText(codeDetailModel.getSize());
         mTvCategory.setText(codeDetailModel.getCodecategory().getCatename());
-        mTvLikeNum.setText(""+codeDetailModel.getStow());
-        mTvCommentNum.setText(""+codeDetailModel.getComments());
-        mTvClickNum.setText(""+codeDetailModel.getClick());
+        mTvLikeNum.setText(String.valueOf(codeDetailModel.getStow()));
+        mTvCommentNum.setText(String.valueOf(codeDetailModel.getComments()));
+        mTvClickNum.setText(String.valueOf(codeDetailModel.getClick()));
     }
 
     @OnClick({R.id.iv_collection,R.id.iv_comment,R.id.iv_go_github})

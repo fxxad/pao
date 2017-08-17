@@ -148,4 +148,5 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
                 mItems.get(position).getUser().getNickname(),
                 mItems.get(position).getUser().getFace());
     }
+
 }

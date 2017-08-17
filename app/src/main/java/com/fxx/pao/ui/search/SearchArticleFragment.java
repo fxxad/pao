@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
+ *  文章搜索fragment
  * Created by fxx on 2017/8/15 0015.
  */
 

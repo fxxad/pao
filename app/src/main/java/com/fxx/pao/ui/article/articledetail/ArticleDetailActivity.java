@@ -25,7 +25,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> implements ArticleDetailContract.View {
 
-
     private int mArticleId;
 
     @BindView(R.id.toobar)
@@ -73,7 +72,8 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -112,7 +112,6 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
     public void onFollowSuccess(BaseMsgModel baseMsgModel) {
         if(baseMsgModel.getSucess()==1){
             Toast.makeText(this,baseMsgModel.getMessage(),Toast.LENGTH_SHORT).show();
-            return;
         }else{
             Toast.makeText(this,baseMsgModel.getMessage(),Toast.LENGTH_SHORT).show();
         }

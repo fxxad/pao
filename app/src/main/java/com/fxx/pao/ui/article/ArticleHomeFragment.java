@@ -75,5 +75,4 @@ public class ArticleHomeFragment extends BaseFragment{
                 break;
         }
     }
-
 }

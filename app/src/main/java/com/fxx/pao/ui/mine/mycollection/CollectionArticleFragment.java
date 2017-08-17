@@ -80,7 +80,7 @@ public class CollectionArticleFragment extends BaseFragment<CollectionArticlePre
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {
-        mSrl.autoLoadmore();
+        mPresenter.getMoreMyCollectionArticles();
     }
 
     @Override

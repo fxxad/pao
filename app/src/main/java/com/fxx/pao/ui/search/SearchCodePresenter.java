@@ -2,13 +2,14 @@ package com.fxx.pao.ui.search;
 
 import com.fxx.pao.model.CodeModel;
 import com.fxx.pao.net.RetrofitHelper;
+import com.fxx.pao.util.NetErrorUtil;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- *
+ *搜索代码presenter
  * Created by fxx on 2017/8/15 0015.
  */
 
@@ -30,35 +31,37 @@ class SearchCodePresenter implements SearchCodeContract.Presenter{
     @Override
     public void getInitSearchCodes(String keyword) {
         p=0;
-        RetrofitHelper.createCodeApi().getSearchCode(p,0,keyword).enqueue(new Callback<CodeModel>() {
-            @Override
-            public void onResponse(Call<CodeModel> call, Response<CodeModel> response) {
-                if(response.isSuccessful()){
-                    mView.onInitSearchCodesSuccess(response.body().getItems());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CodeModel> call, Throwable t) {
-
-            }
-        });
+        RetrofitHelper.createCodeApi().getSearchCode(p,0,keyword)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeModel>() {
+                    @Override
+                    public void accept(CodeModel codeModel) throws Exception {
+                        mView.onInitSearchCodesSuccess(codeModel.getItems());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.onSearchCodesFail(NetErrorUtil.handleThrowable(t));
+                    }
+                });
     }
 
     @Override
     public void getMoreSearchCodes(String keyword) {
-        RetrofitHelper.createCodeApi().getSearchCode(++p,0,keyword).enqueue(new Callback<CodeModel>() {
-            @Override
-            public void onResponse(Call<CodeModel> call, Response<CodeModel> response) {
-                if(response.isSuccessful()){
-                    mView.onLoadMoreSearchCodes(response.body().getItems());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CodeModel> call, Throwable t) {
-
-            }
-        });
+        RetrofitHelper.createCodeApi().getSearchCode(++p,0,keyword)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CodeModel>() {
+                    @Override
+                    public void accept(CodeModel codeModel) throws Exception {
+                        mView.onLoadMoreSearchCodes(codeModel.getItems());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.onSearchCodesFail(NetErrorUtil.handleThrowable(t));
+                    }
+                });
     }
 }

@@ -4,12 +4,11 @@ package com.fxx.pao.ui.mine.mycollection;
 import com.fxx.pao.model.CollectionModel;
 import com.fxx.pao.net.ApiContants;
 import com.fxx.pao.net.RetrofitHelper;
+import com.fxx.pao.util.NetErrorUtil;
 
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  *  收藏文章presenter
@@ -35,47 +34,37 @@ class CollectionArticlePresenter implements CollectionArticleContract.Presenter{
     @Override
     public void getMyCollectionArticles() {
         p =0;
-        RetrofitHelper.createUserApi().collectionArticle(p, ApiContants.COLLECTION_ARTICLE).enqueue(new Callback<CollectionModel>() {
-            @Override
-            public void onResponse(Call<CollectionModel> call, Response<CollectionModel> response) {
-                if(response.isSuccessful()){
-                    mView.getCollectionArticlesSuccess(response.body().getItems());
-                }else{
-                    try {
-                        mView.getCollectionArticlesFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createUserApi().collectionArticle(p, ApiContants.COLLECTION_ARTICLE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CollectionModel>() {
+                    @Override
+                    public void accept(CollectionModel collectionModel) throws Exception {
+                        mView.getCollectionArticlesSuccess(collectionModel.getItems());
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CollectionModel> call, Throwable t) {
-                //TODO
-            }
-        });
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.getCollectionArticlesFail(NetErrorUtil.handleThrowable(t));
+                    }
+                });
     }
 
     @Override
     public void getMoreMyCollectionArticles() {
-        RetrofitHelper.createUserApi().collectionArticle(++p, ApiContants.COLLECTION_ARTICLE).enqueue(new Callback<CollectionModel>() {
-            @Override
-            public void onResponse(Call<CollectionModel> call, Response<CollectionModel> response) {
-                if(response.isSuccessful()){
-                    mView.appendCollectionArticles(response.body().getItems());
-                }else{
-                    try {
-                        mView.getCollectionArticlesFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createUserApi().collectionArticle(++p, ApiContants.COLLECTION_ARTICLE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CollectionModel>() {
+                    @Override
+                    public void accept(CollectionModel collectionModel) throws Exception {
+                        mView.appendCollectionArticles(collectionModel.getItems());
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CollectionModel> call, Throwable t) {
-                //TODO
-            }
-        });
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.getCollectionArticlesFail(NetErrorUtil.handleThrowable(throwable));
+                    }
+                });
     }
 }

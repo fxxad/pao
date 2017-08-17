@@ -3,17 +3,11 @@ package com.fxx.pao.ui.mine;
 import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.model.MyProfileModel;
 import com.fxx.pao.net.RetrofitHelper;
+import com.fxx.pao.util.NetErrorUtil;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.BindException;
-import java.net.ConnectException;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  *个人主页presenter
@@ -23,7 +17,7 @@ import retrofit2.Response;
 class MineHomePresenter implements MineHomeContract.Presenter{
 
     private MineHomeContract.View mView;
-    private MyProfileModel myProfileModel;
+    private MyProfileModel mMyProfileModel;
 
     @Override
     public void setView(MineHomeContract.View view) {
@@ -37,64 +31,42 @@ class MineHomePresenter implements MineHomeContract.Presenter{
 
     @Override
     public void myProfile() {
-        RetrofitHelper.createUserApi().myProfile().enqueue(new Callback<MyProfileModel>() {
-            @Override
-            public void onResponse(Call<MyProfileModel> call, Response<MyProfileModel> response) {
-                if(response.isSuccessful()){
-                    myProfileModel = response.body();
-                    mView.hasLogin(myProfileModel);
-                }else{
-                    try {
-                        mView.getMyProfileFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createUserApi().myProfile()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<MyProfileModel>() {
+                    @Override
+                    public void accept(MyProfileModel myProfileModel) throws Exception {
+                        mMyProfileModel =myProfileModel;
+                        mView.hasLogin(mMyProfileModel);
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MyProfileModel> call, Throwable t) {
-                if (t instanceof SocketTimeoutException) {
-                    mView.getMyProfileFail("连接超时");
-                } else if (t instanceof SocketException) {
-                    if (t instanceof ConnectException) {
-                        mView.getMyProfileFail("网络未连接");
-                    } else if(t instanceof BindException){
-                        mView.getMyProfileFail("网络错误,端口被占用");
-                    } else{
-                        mView.getMyProfileFail("网络错误");
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.getMyProfileFail(NetErrorUtil.handleThrowable(t));
                     }
-                }else if(t instanceof EOFException){
-                    mView.getMyProfileFail("连接丢失");
-                }else{
-                    mView.getMyProfileFail("未知错误");
-                }
-            }
-        });
+                });
     }
 
     @Override
     public void logOut() {
-        RetrofitHelper.createUserApi().logout().enqueue(new Callback<BaseMsgModel>() {
-            @Override
-            public void onResponse(Call<BaseMsgModel> call, Response<BaseMsgModel> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getSucess()==1){
-                        mView.logoutSuccess();
-                    }else{
-                        try {
-                            mView.logoutFailed(response.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
+        RetrofitHelper.createUserApi().logout()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<BaseMsgModel>() {
+                    @Override
+                    public void accept(BaseMsgModel baseMsgModel) throws Exception {
+                        if(baseMsgModel.getSucess()==1){
+                            mView.logoutSuccess();
+                        }else{
+                            mView.logoutFailed(baseMsgModel.getMessage());
                         }
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BaseMsgModel> call, Throwable t) {
-
-            }
-        });
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.logoutFailed(NetErrorUtil.handleThrowable(t));
+                    }
+                });
     }
 }

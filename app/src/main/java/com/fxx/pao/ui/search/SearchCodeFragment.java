@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
+ *代码搜索fragment
  * Created by fxx on 2017/8/15 0015.
  */
 
@@ -129,7 +129,7 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
         switch (view.getId()){
             case R.id.iv_search:
                 mKeyword= mEtKeyword.getText().toString().trim();
-                if(mKeyword == null || mKeyword.equals("")){
+                if(mKeyword.equals("")){
                     Toast.makeText(getContext(),"请输入关键字",Toast.LENGTH_SHORT).show();
                     return;
                 }

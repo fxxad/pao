@@ -24,8 +24,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class SyntheticalRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
+    //轮播图类型
     private static final int VIEW_TYPE_BANNER=0;
+    //列表类型
     private static final int VIEW_TYPE_LIST=1;
 
     private List<ArticleModel.ItemsBean> mItems;
@@ -57,7 +58,12 @@ public class SyntheticalRvAdapter extends RecyclerView.Adapter<RecyclerView.View
             viewHolder.mTvNick.setText(mItems.get(position).getUser().getNickname());
             viewHolder.mTvPraiseNum.setText(String.valueOf(mItems.get(position).getUpvote()));
             viewHolder.mTvReadNum.setText(String.valueOf(mItems.get(position).getClick()));
-            GlideUtil.loadDefaultImage(mItems.get(position).getThumbnail()).into(viewHolder.mIvThumb);
+            if(mItems.get(position).getThumbnail()== null || mItems.get(position).getThumbnail().equals("")){
+                viewHolder.mIvThumb.setVisibility(View.INVISIBLE);
+            }else{
+                viewHolder.mIvThumb.setVisibility(View.VISIBLE);
+                GlideUtil.loadDefaultImage(mItems.get(position).getThumbnail()).into(viewHolder.mIvThumb);
+            }
             GlideUtil.loadHeadImage(mItems.get(position).getUser().getFace()).into(viewHolder.mIvHeader);
             setClickListener(((MyViewHolder)holder),position);
         }else if(holder instanceof BannerViewHolder){
@@ -93,7 +99,6 @@ public class SyntheticalRvAdapter extends RecyclerView.Adapter<RecyclerView.View
         }else{
             return VIEW_TYPE_LIST;
         }
-//        return super.getItemViewType(position);
     }
 
     public List<ArticleModel.ItemsBean> getmItems() {
@@ -105,6 +110,9 @@ public class SyntheticalRvAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.notifyDataSetChanged();
     }
 
+    /**
+     * 列表viewholder
+     */
     static class MyViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.tv_title)
         TextView mTvTitle;
@@ -134,12 +142,15 @@ public class SyntheticalRvAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    /**
+     * 轮播图ViewHolder
+     */
     static class BannerViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.item_live_banner)
         BannerView mBannerView;
 
-        public BannerViewHolder(View itemView) {
+        BannerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }

@@ -25,6 +25,7 @@ import butterknife.BindView;
 
 /**
  * 评论页
+ * Created by fxx on 2017/8/11
  */
 public class CommentActivity extends BaseActivity<CommentPresenter> implements CommentContract.View, CommentRvAdapter.ItemClickListener, OnRefreshListener, OnLoadmoreListener {
 

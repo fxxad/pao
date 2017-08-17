@@ -9,9 +9,13 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.fxx.pao.R;
 import com.fxx.pao.base.BaseActivity;
 import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.event.ScrollToStartEvent;
+import com.fxx.pao.net.ApiContants;
 import com.fxx.pao.ui.article.ArticleHomeFragment;
 import com.fxx.pao.ui.code.CodeHomeFragment;
 import com.fxx.pao.ui.mine.MineHomeFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +78,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     public void onTabReselected(int position) {
-
+        switch (position){
+            case 1:
+                EventBus.getDefault().post(new ScrollToStartEvent(ApiContants.TID_CODES));
+                break;
+            default:
+                break;
+        }
     }
 
     /**

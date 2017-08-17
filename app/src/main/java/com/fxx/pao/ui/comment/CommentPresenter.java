@@ -3,19 +3,12 @@ package com.fxx.pao.ui.comment;
 
 import com.fxx.pao.model.CommentModel;
 import com.fxx.pao.net.RetrofitHelper;
+import com.fxx.pao.util.NetErrorUtil;
 
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.BindException;
-import java.net.ConnectException;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 /**
  *评论presenter
  * Created by fxx on 2017/8/14 0014.
@@ -39,75 +32,37 @@ class CommentPresenter implements CommentContract.Presenter{
     @Override
     public void loadInitComments(int id) {
         p = 0;
-        RetrofitHelper.createArticleApi().getComments(id,p).enqueue(new Callback<CommentModel>() {
-            @Override
-            public void onResponse(Call<CommentModel> call, Response<CommentModel> response) {
-                if(response.isSuccessful()){
-                    mView.onGetCommentsSuccess(response.body().getItems());
-                }else{
-                    try {
-                        mView.onGetCommentsFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createArticleApi().getComments(id,p)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CommentModel>() {
+                    @Override
+                    public void accept(CommentModel commentModel) throws Exception {
+                        mView.onGetCommentsSuccess(commentModel.getItems());
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CommentModel> call, Throwable t) {
-                if (t instanceof SocketTimeoutException) {
-                    mView.onGetCommentsFail("连接超时");
-                } else if (t instanceof SocketException) {
-                    if (t instanceof ConnectException) {
-                        mView.onGetCommentsFail("网络未连接");
-                    } else if(t instanceof BindException){
-                        mView.onGetCommentsFail("网络错误,端口被占用");
-                    } else{
-                        mView.onGetCommentsFail("网络错误");
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                       mView.onGetCommentsFail(NetErrorUtil.handleThrowable(t));
                     }
-                }else if(t instanceof EOFException){
-                    mView.onGetCommentsFail("连接丢失");
-                }else{
-                    mView.onGetCommentsFail("未知错误");
-                }
-            }
-        });
+                });
     }
 
     @Override
     public void loadMoreComments(int id) {
-        RetrofitHelper.createArticleApi().getComments(id,++p).enqueue(new Callback<CommentModel>() {
-            @Override
-            public void onResponse(Call<CommentModel> call, Response<CommentModel> response) {
-                if(response.isSuccessful()){
-                    mView.onAppendComments(response.body().getItems());
-                }else{
-                    try {
-                        mView.onGetCommentsFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createArticleApi().getComments(id,++p)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CommentModel>() {
+                    @Override
+                    public void accept(CommentModel commentModel) throws Exception {
+                        mView.onAppendComments(commentModel.getItems());
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CommentModel> call, Throwable t) {
-                if (t instanceof SocketTimeoutException) {
-                    mView.onGetCommentsFail("连接超时");
-                } else if (t instanceof SocketException) {
-                    if (t instanceof ConnectException) {
-                        mView.onGetCommentsFail("网络未连接");
-                    } else if(t instanceof BindException){
-                        mView.onGetCommentsFail("网络错误,端口被占用");
-                    } else{
-                        mView.onGetCommentsFail("网络错误");
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.onGetCommentsFail(NetErrorUtil.handleThrowable(t));
                     }
-                }else if(t instanceof EOFException){
-                    mView.onGetCommentsFail("连接丢失");
-                }else{
-                    mView.onGetCommentsFail("未知错误");
-                }
-            }
-        });
+                });
     }
 }

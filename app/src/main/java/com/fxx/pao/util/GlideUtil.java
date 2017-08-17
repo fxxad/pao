@@ -10,12 +10,10 @@ import com.fxx.pao.R;
 /**
  * Glide帮助类
  */
-public class GlideUtil
-{
+public class GlideUtil {
 
     @Deprecated
-    public static <T> DrawableTypeRequest<T> load(Context context, T model)
-    {
+    public static <T> DrawableTypeRequest<T> load(Context context, T model) {
         return load(model);
     }
 
@@ -26,8 +24,7 @@ public class GlideUtil
      * @param <T>
      * @return
      */
-    public static <T> DrawableTypeRequest<T> load(T model)
-    {
+    public static <T> DrawableTypeRequest<T> load(T model) {
         return (DrawableTypeRequest<T>) Glide.with(PaoApp.getInstance()).load(model)
                 .error(R.drawable.nopic)
                 .dontAnimate();
@@ -36,8 +33,7 @@ public class GlideUtil
     //---------以下为扩展方法------------
 
     @Deprecated
-    public static <T> DrawableTypeRequest<T> loadHeadImage(Context context, T model)
-    {
+    public static <T> DrawableTypeRequest<T> loadHeadImage(Context context, T model) {
         return loadHeadImage(model);
     }
 
@@ -55,8 +51,7 @@ public class GlideUtil
      * @param <T>
      * @return
      */
-    public static <T> DrawableTypeRequest<T> loadHeadImage(T model)
-    {
+    public static <T> DrawableTypeRequest<T> loadHeadImage(T model) {
         return (DrawableTypeRequest<T>) load(model)
                 .placeholder(R.drawable.ic_default_head)
                 .error(R.drawable.ic_default_head)
@@ -66,8 +61,7 @@ public class GlideUtil
     /**
      * 加载通用图片
      */
-    public static <T> DrawableTypeRequest<T> loadDefaultImage(T model)
-    {
+    public static <T> DrawableTypeRequest<T> loadDefaultImage(T model) {
         return (DrawableTypeRequest<T>) load(model)
                 .placeholder(R.drawable.ic_pic_loading)
                 .error(R.drawable.ic_pic_loadfail)

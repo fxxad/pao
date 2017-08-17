@@ -27,8 +27,6 @@ public class MyCollectionActivity extends BaseActivity {
     @BindView(R.id.toolar_collection)
     Toolbar mToolbar;
 
-    private CollectionVpAdapter mAdapter;
-
     public static void start(Context context){
         Intent intent =new Intent(context,MyCollectionActivity.class);
         context.startActivity(intent);
@@ -52,9 +50,10 @@ public class MyCollectionActivity extends BaseActivity {
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mAdapter =new CollectionVpAdapter(getSupportFragmentManager(),this);
+        CollectionVpAdapter mAdapter = new CollectionVpAdapter(getSupportFragmentManager(), this);
         mVpCollection.setAdapter(mAdapter);
         mStl.setViewPager(mVpCollection);
     }

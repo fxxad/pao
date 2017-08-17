@@ -11,7 +11,7 @@ import java.util.List;
  * Created by fxx on 2017/8/15 0015.
  */
 
-public interface CollectionArticleContract {
+interface CollectionArticleContract {
     interface View extends BaseView{
         void getCollectionArticlesSuccess(List<CollectionModel.ItemsBean> itemsBeen);
         void appendCollectionArticles(List<CollectionModel.ItemsBean> itemsBeen);

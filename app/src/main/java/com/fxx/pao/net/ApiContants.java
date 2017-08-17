@@ -1,15 +1,15 @@
 package com.fxx.pao.net;
 
 /**
- *
+ *  api相关常量
  * Created by fxx on 2017/8/11 0011.
  */
 
 public class ApiContants {
-    public static final String BASE_URL="http://api.jcodecraeer.com";
+    static final String BASE_URL="http://api.jcodecraeer.com";
 
     //tid所有
-    public static final int TID_ALL=0;
+//    public static final int TID_ALL=0;
     //tid安卓
     public static final int TID_ANDROID=16;
     //tid前端
@@ -28,6 +28,9 @@ public class ApiContants {
     public static final int TID_REC_APPLICATION=32;
     //开发日志
     public static final int TID_DEVLOG=15;
+
+    //代码列表
+    public static final int TID_CODES=20;
 
     public static final int COLLECTION_ARTICLE=1;
     public static final int COLLECTION_CODE=-19;

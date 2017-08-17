@@ -13,13 +13,19 @@ import android.widget.Toast;
 import com.fxx.pao.R;
 import com.fxx.pao.adapter.CodeRvAdapter;
 import com.fxx.pao.base.BaseFragment;
+import com.fxx.pao.event.ScrollToStartEvent;
 import com.fxx.pao.model.CodeModel;
+import com.fxx.pao.net.ApiContants;
 import com.fxx.pao.ui.code.codedetail.CodeDetailActivity;
 import com.fxx.pao.ui.search.SearchActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +59,14 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
         loadData();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -152,6 +165,18 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
             case R.id.iv_search_code:
                 SearchActivity.start(getContext(),SearchActivity.SEARCHTYPE_CODE);
                 break;
+        }
+    }
+
+    /**
+     * 处理列表滚动的顶部事件
+     * @param event 事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleMsg(ScrollToStartEvent event){
+        if(event.getCode() == ApiContants.TID_CODES){
+//        mRvCodes.smoothScrollToPosition(0);//这里滑动过程会比较长
+            mRvCodes.scrollToPosition(0);
         }
     }
 }

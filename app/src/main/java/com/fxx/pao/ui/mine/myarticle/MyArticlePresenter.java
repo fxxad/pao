@@ -3,17 +3,12 @@ package com.fxx.pao.ui.mine.myarticle;
 
 import com.fxx.pao.model.ArticleModel;
 import com.fxx.pao.net.RetrofitHelper;
+import com.fxx.pao.util.NetErrorUtil;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.BindException;
-import java.net.ConnectException;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  *  我的文章presenter
@@ -39,75 +34,37 @@ class MyArticlePresenter implements MyArticleContract.Presenter{
     @Override
     public void myInitArticles() {
         p=0;
-        RetrofitHelper.createUserApi().myArticle(p).enqueue(new Callback<ArticleModel>() {
-            @Override
-            public void onResponse(Call<ArticleModel> call, Response<ArticleModel> response) {
-                if(response.isSuccessful()){
-                    mView.getMyArticlesSuccess(response.body().getItems());
-                }else{
-                    try {
-                        mView.getMyArticlesFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createUserApi().myArticle(p)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ArticleModel>() {
+                    @Override
+                    public void accept(ArticleModel articleModel) throws Exception {
+                        mView.getMyArticlesSuccess(articleModel.getItems());
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArticleModel> call, Throwable t) {
-                if (t instanceof SocketTimeoutException) {
-                    mView.getMyArticlesFail("连接超时");
-                } else if (t instanceof SocketException) {
-                    if (t instanceof ConnectException) {
-                        mView.getMyArticlesFail("网络未连接");
-                    } else if(t instanceof BindException){
-                        mView.getMyArticlesFail("网络错误,端口被占用");
-                    } else{
-                        mView.getMyArticlesFail("网络错误");
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.getMyArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                }else if(t instanceof EOFException){
-                    mView.getMyArticlesFail("连接丢失");
-                }else{
-                    mView.getMyArticlesFail("未知错误");
-                }
-            }
-        });
+                });
     }
 
     @Override
     public void myMoreArticles() {
-        RetrofitHelper.createUserApi().myArticle(++p).enqueue(new Callback<ArticleModel>() {
-            @Override
-            public void onResponse(Call<ArticleModel> call, Response<ArticleModel> response) {
-                if(response.isSuccessful()){
-                    mView.appendMyArticles(response.body().getItems());
-                }else{
-                    try {
-                        mView.getMyArticlesFail(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        RetrofitHelper.createUserApi().myArticle(++p)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ArticleModel>() {
+                    @Override
+                    public void accept(ArticleModel articleModel) throws Exception {
+                        mView.appendMyArticles(articleModel.getItems());
                     }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArticleModel> call, Throwable t) {
-                if (t instanceof SocketTimeoutException) {
-                    mView.getMyArticlesFail("连接超时");
-                } else if (t instanceof SocketException) {
-                    if (t instanceof ConnectException) {
-                        mView.getMyArticlesFail("网络未连接");
-                    } else if(t instanceof BindException){
-                        mView.getMyArticlesFail("网络错误,端口被占用");
-                    } else{
-                        mView.getMyArticlesFail("网络错误");
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable t) throws Exception {
+                        mView.getMyArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                }else if(t instanceof EOFException){
-                    mView.getMyArticlesFail("连接丢失");
-                }else{
-                    mView.getMyArticlesFail("未知错误");
-                }
-            }
-        });
+                });
     }
 }

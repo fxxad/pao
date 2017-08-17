@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.fxx.pao.PaoApp;
 
 /**
- *
+ *  工具类
  * Created by fxx on 2017/8/14 0014.
  */
 

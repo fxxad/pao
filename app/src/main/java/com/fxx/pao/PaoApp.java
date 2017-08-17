@@ -11,21 +11,22 @@ import com.squareup.leakcanary.LeakCanary;
  * Created by fxx on 2017/8/10 0010.
  */
 
-public class PaoApp extends Application{
+public class PaoApp extends Application {
 
-    //Paoapp实例
+    //PaoApp实例
     private static PaoApp instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance=this;
+        instance = this;
         initImageLoader();
         LeakCanary.install(this);
     }
 
     /**
      * 获取app实例
+     *
      * @return application对象
      */
     public static PaoApp getInstance() {
