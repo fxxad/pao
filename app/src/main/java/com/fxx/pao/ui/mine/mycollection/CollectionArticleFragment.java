@@ -70,7 +70,7 @@ public class CollectionArticleFragment extends BaseFragment<CollectionArticlePre
 
     @Override
     public void loadData() {
-        mSrl.autoRefresh();
+        mSrl.autoRefresh(0);
     }
 
     @Override

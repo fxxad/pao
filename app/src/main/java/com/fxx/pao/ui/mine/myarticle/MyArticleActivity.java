@@ -82,7 +82,7 @@ public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implemen
         mItems = new ArrayList<>();
         mAdapter = new ArticleRvAdapter(mItems);
         mRvArticle.setAdapter(mAdapter);
-        mSrl.autoRefresh();
+        mSrl.autoRefresh(0);
     }
 
 

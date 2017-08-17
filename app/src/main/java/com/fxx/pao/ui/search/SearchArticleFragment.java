@@ -115,16 +115,17 @@ public class SearchArticleFragment extends BaseFragment<SearchArticlePresenter> 
             mSrl.finishLoadmore();
     }
 
+
     @OnClick({R.id.iv_search,R.id.iv_back})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.iv_search:
                 mKeyword= mEtKeyword.getText().toString().trim();
-                if(mKeyword == null || mKeyword.equals("")){
+                if(mKeyword.equals("")){
                     Toast.makeText(getContext(),"请输入关键字",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mSrl.autoRefresh();
+                mSrl.autoRefresh(0);
                 Util.hideInput(mEtKeyword);
                 break;
             case R.id.iv_back:

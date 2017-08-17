@@ -85,7 +85,7 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
 
     @Override
     public void loadData() {
-        mSrl.autoRefresh();
+        mSrl.autoRefresh(0);
     }
 
     @Override

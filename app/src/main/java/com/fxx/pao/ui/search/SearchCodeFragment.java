@@ -133,7 +133,7 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
                     Toast.makeText(getContext(),"请输入关键字",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mSrl.autoRefresh();
+                mSrl.autoRefresh(0);
                 Util.hideInput(mEtKeyword);
                 break;
             case R.id.iv_back:

@@ -97,7 +97,7 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
 
     @Override
     public void loadData() {
-        mSrl.autoRefresh();
+        mSrl.autoRefresh(0);
     }
 
     @Override
@@ -176,7 +176,11 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
     public void handleMsg(ScrollToStartEvent event){
         if(event.getCode() == ApiContants.TID_CODES){
 //        mRvCodes.smoothScrollToPosition(0);//这里滑动过程会比较长
-            mRvCodes.scrollToPosition(0);
+            if(mRvCodes.canScrollVertically(-1)){//不在顶部
+                mRvCodes.scrollToPosition(0);
+            }else{//已经滑动到顶部
+                mSrl.autoRefresh(0);
+            }
         }
     }
 }

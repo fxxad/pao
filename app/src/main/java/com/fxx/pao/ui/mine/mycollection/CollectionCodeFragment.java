@@ -70,7 +70,7 @@ public class CollectionCodeFragment extends BaseFragment<CollectionCodePresenter
 
     @Override
     public void loadData() {
-        mSrl.autoRefresh();
+        mSrl.autoRefresh(0);
     }
 
     @Override
