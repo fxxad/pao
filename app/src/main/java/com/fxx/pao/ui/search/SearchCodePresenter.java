@@ -1,10 +1,14 @@
 package com.fxx.pao.ui.search;
 
+import android.util.Log;
+
 import com.fxx.pao.model.CodeModel;
 import com.fxx.pao.net.RetrofitHelper;
 import com.fxx.pao.util.NetErrorUtil;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -41,8 +45,8 @@ class SearchCodePresenter implements SearchCodeContract.Presenter{
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(Throwable t) throws Exception {
-                        mView.onSearchCodesFail(NetErrorUtil.handleThrowable(t));
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.onSearchCodesFail(NetErrorUtil.handleThrowable(throwable));
                     }
                 });
     }

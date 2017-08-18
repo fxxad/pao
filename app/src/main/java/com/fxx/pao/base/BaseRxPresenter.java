@@ -1,7 +1,5 @@
 package com.fxx.pao.base;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -9,24 +7,22 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by Administrator on 2017/8/16 0016.
  */
 
-public class BaseRxPresenter<V extends BaseView> implements BasePresenter<V>{
+public abstract class BaseRxPresenter<V extends BaseView> implements BasePresenter<V>{
 
     private CompositeDisposable mCompositeDisposable;
 
+    private V mView;
+
     @Override
     public void setView(V view) {
-
+        mView =view;
+        mCompositeDisposable =new CompositeDisposable();
     }
 
     @Override
     public void removeView() {
-        if(mCompositeDisposable != null)
-            mCompositeDisposable.clear();
+        mView = null;
+        mCompositeDisposable.dispose();
     }
-
-    public void addTask(Observable observable, Observer observer){
-        observable.subscribeWith(observer);
-    }
-
 
 }
