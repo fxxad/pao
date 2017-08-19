@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.mine;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.MyProfileModel;
 
@@ -16,9 +16,9 @@ interface MineHomeContract {
         void logoutSuccess();
         void logoutFailed(String msg);
     }
-    interface Presenter extends BasePresenter<View>{
-        void myProfile();
-        void logOut();
+    abstract static class Presenter extends BaseRxPresenter<View> {
+        public abstract void myProfile();
+        public abstract void logOut();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.comment;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.CommentModel;
 
@@ -17,8 +17,8 @@ interface CommentContract {
         void onAppendComments(List<CommentModel.ItemsBean> items);
         void onGetCommentsFail(String errorMSg);
     }
-    interface Presenter extends BasePresenter<View>{
-        void loadInitComments(int id);
-        void loadMoreComments(int id);
+    public abstract class Presenter extends BaseRxPresenter<View> {
+        abstract void loadInitComments(int id);
+        abstract void loadMoreComments(int id);
     }
 }

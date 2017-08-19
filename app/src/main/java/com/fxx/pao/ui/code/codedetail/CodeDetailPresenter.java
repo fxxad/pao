@@ -16,23 +16,11 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/11 0011.
  */
 
-class CodeDetailPresenter implements CodeDetailContract.Presener {
-
-    private CodeDetailContract.View mView;
-
-    @Override
-    public void setView(CodeDetailContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
+class CodeDetailPresenter extends CodeDetailContract.Presener {
 
     @Override
     public void getCodeDetail(int codeId) {
-        RetrofitHelper.createCodeApi().getCodeDetail(codeId)
+        mCompositeDisposable.add(RetrofitHelper.createCodeApi().getCodeDetail(codeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CodeDetailModel>() {
@@ -45,12 +33,12 @@ class CodeDetailPresenter implements CodeDetailContract.Presener {
                     public void accept(Throwable t) throws Exception {
                         mView.getCodeDetailFailed(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void stow(int codeId) {
-        RetrofitHelper.createUserApi().stow(codeId)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().stow(codeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BaseMsgModel>() {
@@ -63,6 +51,6 @@ class CodeDetailPresenter implements CodeDetailContract.Presener {
                     public void accept(Throwable t) throws Exception {
                         mView.stowFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 }

@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.login;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.BaseMsgModel;
 
@@ -14,7 +14,7 @@ interface LoginContract {
         void loginSuccess(BaseMsgModel msgModel);
         void loginFail(String errorMsg);
     }
-    interface Presenter extends BasePresenter<View>{
-        void login(String count,String pwd);
+    public abstract class Presenter extends BaseRxPresenter<View> {
+        abstract void login(String count, String pwd);
     }
 }

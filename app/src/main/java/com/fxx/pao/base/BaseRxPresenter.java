@@ -3,15 +3,15 @@ package com.fxx.pao.base;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- *  未使用   TODO
- * Created by Administrator on 2017/8/16 0016.
+ *  基础RxPresenter类，添加CompositeDisposable用于解除订阅
+ * Created by fxx on 2017/8/16 0016.
  */
 
 public abstract class BaseRxPresenter<V extends BaseView> implements BasePresenter<V>{
 
-    private CompositeDisposable mCompositeDisposable;
+    public CompositeDisposable mCompositeDisposable;
 
-    private V mView;
+    public V mView;
 
     @Override
     public void setView(V view) {
@@ -22,7 +22,8 @@ public abstract class BaseRxPresenter<V extends BaseView> implements BasePresent
     @Override
     public void removeView() {
         mView = null;
-        mCompositeDisposable.dispose();
+        if(mCompositeDisposable !=null && !mCompositeDisposable.isDisposed())
+            mCompositeDisposable.dispose();
     }
 
 }

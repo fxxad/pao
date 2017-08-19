@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.mine.myarticle;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.ArticleModel;
 
@@ -17,8 +17,8 @@ interface MyArticleContract {
         void appendMyArticles(List<ArticleModel.ItemsBean> itemsBeen);
         void getMyArticlesFail(String msg);
     }
-    interface Presenter extends BasePresenter<MyArticleContract.View>{
-        void myInitArticles();
-        void myMoreArticles();
+    abstract static class Presenter extends BaseRxPresenter<View> {
+        public abstract void myInitArticles();
+        public abstract void myMoreArticles();
     }
 }

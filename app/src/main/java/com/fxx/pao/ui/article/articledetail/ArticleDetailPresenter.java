@@ -16,24 +16,13 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/13.
  */
 
-class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
-
-    private ArticleDetailContract.View mView;
+class ArticleDetailPresenter extends ArticleDetailContract.Presenter{
 
     private ArticleDetailModel mArticleDetailModel;
-    @Override
-    public void setView(ArticleDetailContract.View view) {
-        mView =view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
 
     @Override
     public void loadArticleDetail(int articleId) {
-        RetrofitHelper.createArticleApi().getArticleDetail(articleId)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getArticleDetail(articleId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleDetailModel>() {
@@ -47,12 +36,12 @@ class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.onGetArticleDetailFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
     }
 
     @Override
     public void followUser(int userId) {
-        RetrofitHelper.createUserApi().followUser(userId)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().followUser(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BaseMsgModel>() {
@@ -65,12 +54,12 @@ class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.onFollowFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
     }
 
     @Override
     public void collect(int articleId) {
-        RetrofitHelper.createUserApi().stow(articleId)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().stow(articleId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BaseMsgModel>() {
@@ -83,13 +72,13 @@ class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.collectFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
 
     }
 
     @Override
     public void praise(int articleId) {
-        RetrofitHelper.createUserApi().praise(articleId)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().praise(articleId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BaseMsgModel>() {
@@ -102,7 +91,7 @@ class ArticleDetailPresenter implements ArticleDetailContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.praiseFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     public ArticleDetailModel getArticleDetailModel() {

@@ -14,25 +14,13 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/14 0014.
  */
 
-class CommentPresenter implements CommentContract.Presenter{
-    private CommentContract.View mView;
-
+class CommentPresenter extends CommentContract.Presenter{
     private int p;
-
-    @Override
-    public void setView(CommentContract.View view) {
-        mView =view;
-    }
-
-    @Override
-    public void removeView() {
-        mView =null;
-    }
 
     @Override
     public void loadInitComments(int id) {
         p = 0;
-        RetrofitHelper.createArticleApi().getComments(id,p)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getComments(id,p)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CommentModel>() {
@@ -45,12 +33,12 @@ class CommentPresenter implements CommentContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                        mView.onGetCommentsFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void loadMoreComments(int id) {
-        RetrofitHelper.createArticleApi().getComments(id,++p)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getComments(id,++p)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CommentModel>() {
@@ -63,6 +51,6 @@ class CommentPresenter implements CommentContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.onGetCommentsFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 }

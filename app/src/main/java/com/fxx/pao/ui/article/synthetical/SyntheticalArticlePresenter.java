@@ -14,28 +14,17 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/11 0011.
  */
 
-class SyntheticalArticlePresenter implements SyntheticallArticleContract.Presenter {
+class SyntheticalArticlePresenter extends SyntheticallArticleContract.Presenter {
 
-    private SyntheticallArticleContract.View mView;
     /**
      * 分页数
      */
     private int p;
 
     @Override
-    public void setView(SyntheticallArticleContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
-
-    @Override
     public void loadInitArticles() {
         p=0;
-        RetrofitHelper.createArticleApi().getArticles(p, ApiContants.TID_NEWS)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getArticles(p, ApiContants.TID_NEWS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -48,12 +37,12 @@ class SyntheticalArticlePresenter implements SyntheticallArticleContract.Present
                     public void accept(Throwable t) throws Exception {
                        mView.loadArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void loadMoreArticles() {
-        RetrofitHelper.createArticleApi().getArticles(++p,ApiContants.TID_NEWS)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getArticles(++p,ApiContants.TID_NEWS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -66,12 +55,12 @@ class SyntheticalArticlePresenter implements SyntheticallArticleContract.Present
                     public void accept(Throwable t) throws Exception {
                         mView.loadArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void loadBannerData() {
-        RetrofitHelper.createArticleApi().slideArticles()
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().slideArticles()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -84,6 +73,6 @@ class SyntheticalArticlePresenter implements SyntheticallArticleContract.Present
                     public void accept(Throwable t) throws Exception {
                         mView.loadBannerDataFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 }

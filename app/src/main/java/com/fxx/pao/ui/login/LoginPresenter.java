@@ -16,19 +16,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/14 0014.
  */
 
-class LoginPresenter implements LoginContract.Presenter{
+class LoginPresenter extends LoginContract.Presenter{
 
-    private LoginContract.View mView;
-
-    @Override
-    public void setView(LoginContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
 
     @Override
     public void login(String count, String pwd) {
@@ -40,7 +29,7 @@ class LoginPresenter implements LoginContract.Presenter{
             mView.loginFail("密码不能为空");
             return;
         }
-        RetrofitHelper.createUserApi().login(count,pwd)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().login(count,pwd)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BaseMsgModel>() {
@@ -53,7 +42,7 @@ class LoginPresenter implements LoginContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.loginFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
     }
 
 }

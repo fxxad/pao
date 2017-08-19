@@ -1,6 +1,7 @@
 package com.fxx.pao.ui.article.other;
 
 import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.ArticleModel;
 
@@ -31,17 +32,17 @@ interface ArticleListContract {
          */
         void loadArticlesFail(String msg);
     }
-    interface Presenter extends BasePresenter<View>{
+    public abstract class Presenter extends BaseRxPresenter<View>{
         /**
          * 加载首页文章
          * @param tid 组id
          */
-        void loadInitArticles(int tid);
+        abstract void loadInitArticles(int tid);
 
         /**
          * 加载更多文章
          * @param tid 组id
          */
-        void loadMoreArticles(int tid);
+        abstract void loadMoreArticles(int tid);
     }
 }

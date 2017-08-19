@@ -14,25 +14,14 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/11 0011.
  */
 
-class ArticleListPresenter implements ArticleListContract.Presenter {
-
-    private ArticleListContract.View mView;
+class ArticleListPresenter extends ArticleListContract.Presenter {
     //分页数
     private int p;
-    @Override
-    public void setView(ArticleListContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
 
     @Override
     public void loadInitArticles(int tid) {
         p=0;
-        RetrofitHelper.createArticleApi().getArticles(p,tid)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getArticles(p,tid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -45,12 +34,12 @@ class ArticleListPresenter implements ArticleListContract.Presenter {
                     public void accept(Throwable t) throws Exception {
                         mView.loadArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void loadMoreArticles(int tid) {
-        RetrofitHelper.createArticleApi().getArticles(++p,tid)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getArticles(++p,tid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -63,6 +52,6 @@ class ArticleListPresenter implements ArticleListContract.Presenter {
                     public void accept(Throwable t) throws Exception {
                         mView.loadArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 }

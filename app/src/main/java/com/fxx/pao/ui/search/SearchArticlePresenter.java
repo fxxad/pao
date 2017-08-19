@@ -12,25 +12,13 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/15 0015.
  */
 
-class SearchArticlePresenter implements SearchArticleContract.Presenter{
-
-    private SearchArticleContract.View mView;
+class SearchArticlePresenter extends SearchArticleContract.Presenter {
     private int p;
-
-    @Override
-    public void setView(SearchArticleContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
 
     @Override
     public void getInitSearchArticles(String keyword) {
         p=0;
-        RetrofitHelper.createArticleApi().getSearchArticles(keyword,p)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getSearchArticles(keyword,p)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -43,12 +31,12 @@ class SearchArticlePresenter implements SearchArticleContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.onSearchArticlesFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
     }
 
     @Override
     public void getMoreSearchArticles(String keyword) {
-        RetrofitHelper.createArticleApi().getSearchArticles(keyword,++p)
+        mCompositeDisposable.add(RetrofitHelper.createArticleApi().getSearchArticles(keyword,++p)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -61,7 +49,7 @@ class SearchArticlePresenter implements SearchArticleContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.onSearchArticlesFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
     }
 
 }

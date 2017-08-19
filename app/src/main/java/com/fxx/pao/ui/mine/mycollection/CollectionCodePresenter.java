@@ -14,25 +14,13 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/15 0015.
  */
 
-class CollectionCodePresenter implements CollectionCodeContract.Presenter{
+class CollectionCodePresenter extends CollectionCodeContract.Presenter {
     private int p;
-
-    private CollectionCodeContract.View mView;
-
-    @Override
-    public void setView(CollectionCodeContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView =null;
-    }
 
     @Override
     public void loadInitCollectionCodes() {
         p=0;
-        RetrofitHelper.createUserApi().collectionArticle(p, ApiContants.COLLECTION_CODE)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().collectionArticle(p, ApiContants.COLLECTION_CODE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CollectionModel>() {
@@ -45,12 +33,12 @@ class CollectionCodePresenter implements CollectionCodeContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.loadCollectionCodesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void loadMoreCollectionCodes() {
-        RetrofitHelper.createUserApi().collectionArticle(++p, ApiContants.COLLECTION_CODE)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().collectionArticle(++p, ApiContants.COLLECTION_CODE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CollectionModel>() {
@@ -63,6 +51,6 @@ class CollectionCodePresenter implements CollectionCodeContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.loadCollectionCodesFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
     }
 }

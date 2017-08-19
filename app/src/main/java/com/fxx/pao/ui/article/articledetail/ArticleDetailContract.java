@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.article.articledetail;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.ArticleDetailModel;
 import com.fxx.pao.model.BaseMsgModel;
@@ -34,28 +34,28 @@ interface ArticleDetailContract {
 
         void praiseFail(String msg);
     }
-    interface Presenter extends BasePresenter<ArticleDetailContract.View>{
+    public abstract class Presenter extends BaseRxPresenter<View> {
         /**
          * 获取文章详情
          */
-        void loadArticleDetail(int articleId);
+        public abstract void loadArticleDetail(int articleId);
 
         /**
          * 关注
          * @param userId 用户id
          */
-        void followUser(int userId);
+        public abstract void followUser(int userId);
 
         /**
          * 收藏
          * @param articleId 文章id
          */
-        void collect(int articleId);
+        public abstract void collect(int articleId);
 
         /**
          * 点赞
          * @param articleId 文章id
          */
-        void praise(int articleId);
+        public abstract void praise(int articleId);
     }
 }

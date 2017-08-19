@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.search;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.CodeModel;
 
@@ -17,8 +17,8 @@ interface SearchCodeContract {
         void onLoadMoreSearchCodes(List<CodeModel.ItemsBean> itemsBeen);
         void onSearchCodesFail(String msg);
     }
-    interface Presenter extends BasePresenter<SearchCodeContract.View>{
-        void getInitSearchCodes(String keyword);
-        void getMoreSearchCodes(String keyword);
+    abstract class Presenter extends BaseRxPresenter<View>{
+        abstract void getInitSearchCodes(String keyword);
+        abstract void getMoreSearchCodes(String keyword);
     }
 }

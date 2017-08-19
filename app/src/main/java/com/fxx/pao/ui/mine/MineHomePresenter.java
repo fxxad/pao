@@ -14,24 +14,12 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/14.
  */
 
-class MineHomePresenter implements MineHomeContract.Presenter{
-
-    private MineHomeContract.View mView;
+class MineHomePresenter extends MineHomeContract.Presenter {
     private MyProfileModel mMyProfileModel;
 
     @Override
-    public void setView(MineHomeContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-            mView = null;
-    }
-
-    @Override
     public void myProfile() {
-        RetrofitHelper.createUserApi().myProfile()
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().myProfile()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<MyProfileModel>() {
@@ -45,12 +33,12 @@ class MineHomePresenter implements MineHomeContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.getMyProfileFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void logOut() {
-        RetrofitHelper.createUserApi().logout()
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().logout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BaseMsgModel>() {
@@ -67,6 +55,6 @@ class MineHomePresenter implements MineHomeContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.logoutFailed(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 }

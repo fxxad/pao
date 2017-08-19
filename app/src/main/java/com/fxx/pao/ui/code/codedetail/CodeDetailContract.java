@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.code.codedetail;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.BaseMsgModel;
 import com.fxx.pao.model.CodeDetailModel;
@@ -37,18 +37,18 @@ interface CodeDetailContract {
         void stowFail(String msg);
 
     }
-    interface Presener extends BasePresenter<View>{
+    public abstract class Presener extends BaseRxPresenter<View> {
         /**
          * 获取代码详情
          * @param codeId 代码id
          */
-        void getCodeDetail(int codeId);
+        abstract void getCodeDetail(int codeId);
 
         /**
          * 收藏
          * @param codeId 代码id
          */
-        void stow(int codeId);
+        abstract void stow(int codeId);
     }
 
 }

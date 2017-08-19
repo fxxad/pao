@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.code;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.CodeModel;
 
@@ -30,15 +30,15 @@ interface CodeHomeContract {
          */
         void loadCodesFail(String msg);
     }
-    interface Presenter extends BasePresenter<View> {
+    public abstract class Presenter extends BaseRxPresenter<View> {
         /**
          * 加载首屏代码数据
          */
-        void loadInitCodeItems();
+        abstract void loadInitCodeItems();
 
         /**
          * 加载更多
          */
-        void loadMoreCodeItems();
+        abstract void loadMoreCodeItems();
     }
 }

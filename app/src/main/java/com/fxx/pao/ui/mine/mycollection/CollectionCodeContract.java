@@ -1,6 +1,7 @@
 package com.fxx.pao.ui.mine.mycollection;
 
 import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.CollectionModel;
 
@@ -17,8 +18,8 @@ interface CollectionCodeContract {
         void loadMoreCollectionCodesSuccess(List<CollectionModel.ItemsBean> itemsBeen);
         void loadCollectionCodesFail(String msg);
     }
-    interface Presenter extends BasePresenter<CollectionCodeContract.View>{
-        void loadInitCollectionCodes();
-        void loadMoreCollectionCodes();
+    abstract static class Presenter extends BaseRxPresenter<View> {
+        public abstract void loadInitCollectionCodes();
+        public abstract void loadMoreCollectionCodes();
     }
 }

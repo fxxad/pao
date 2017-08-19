@@ -15,26 +15,13 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/15 0015.
  */
 
-class CollectionArticlePresenter implements CollectionArticleContract.Presenter{
+class CollectionArticlePresenter extends CollectionArticleContract.Presenter {
     private int p;
-
-    private CollectionArticleContract.View mView;
-
-
-    @Override
-    public void setView(CollectionArticleContract.View view) {
-        mView =view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
 
     @Override
     public void getMyCollectionArticles() {
         p =0;
-        RetrofitHelper.createUserApi().collectionArticle(p, ApiContants.COLLECTION_ARTICLE)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().collectionArticle(p, ApiContants.COLLECTION_ARTICLE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CollectionModel>() {
@@ -47,12 +34,12 @@ class CollectionArticlePresenter implements CollectionArticleContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.getCollectionArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void getMoreMyCollectionArticles() {
-        RetrofitHelper.createUserApi().collectionArticle(++p, ApiContants.COLLECTION_ARTICLE)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().collectionArticle(++p, ApiContants.COLLECTION_ARTICLE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CollectionModel>() {
@@ -65,6 +52,6 @@ class CollectionArticlePresenter implements CollectionArticleContract.Presenter{
                     public void accept(Throwable throwable) throws Exception {
                         mView.getCollectionArticlesFail(NetErrorUtil.handleThrowable(throwable));
                     }
-                });
+                }));
     }
 }

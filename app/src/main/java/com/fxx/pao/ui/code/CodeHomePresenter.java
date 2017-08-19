@@ -13,9 +13,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/11 0011.
  */
 
-class CodeHomePresenter implements CodeHomeContract.Presenter{
-
-    private CodeHomeContract.View mView;
+class CodeHomePresenter extends CodeHomeContract.Presenter{
 
     /**
      * 分页数
@@ -23,19 +21,9 @@ class CodeHomePresenter implements CodeHomeContract.Presenter{
     private int mPageIndex=0;
 
     @Override
-    public void setView(CodeHomeContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView=null;
-    }
-
-    @Override
     public void loadInitCodeItems() {
         mPageIndex = 0;
-        RetrofitHelper.createCodeApi().getCodeList(mPageIndex)
+        mCompositeDisposable.add(RetrofitHelper.createCodeApi().getCodeList(mPageIndex)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CodeModel>() {
@@ -48,12 +36,12 @@ class CodeHomePresenter implements CodeHomeContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.loadCodesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void loadMoreCodeItems(){
-        RetrofitHelper.createCodeApi().getCodeList(++mPageIndex)
+        mCompositeDisposable.add(RetrofitHelper.createCodeApi().getCodeList(++mPageIndex)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CodeModel>() {
@@ -66,7 +54,7 @@ class CodeHomePresenter implements CodeHomeContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.loadCodesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
 }

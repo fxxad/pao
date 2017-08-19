@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.article.synthetical;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.ArticleModel;
 
@@ -43,20 +43,20 @@ interface SyntheticallArticleContract {
          */
         void loadBannerDataFail(String msg);
     }
-    interface Presenter extends BasePresenter<View>{
+    public abstract class Presenter extends BaseRxPresenter<View> {
         /**
          * 加载首页列表
          */
-        void loadInitArticles();
+        abstract void loadInitArticles();
 
         /**
          * 加载更多列表
          */
-        void loadMoreArticles();
+        abstract void loadMoreArticles();
 
         /**
          * 加载轮播图
          */
-        void loadBannerData();
+        abstract void loadBannerData();
     }
 }

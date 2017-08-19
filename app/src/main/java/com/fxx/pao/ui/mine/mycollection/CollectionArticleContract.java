@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.mine.mycollection;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.CollectionModel;
 
@@ -17,8 +17,8 @@ interface CollectionArticleContract {
         void appendCollectionArticles(List<CollectionModel.ItemsBean> itemsBeen);
         void getCollectionArticlesFail(String msg);
     }
-    interface Presenter extends BasePresenter<CollectionArticleContract.View>{
-        void getMyCollectionArticles();
-        void getMoreMyCollectionArticles();
+    abstract static class Presenter extends BaseRxPresenter<View> {
+        public abstract void getMyCollectionArticles();
+        public abstract void getMoreMyCollectionArticles();
     }
 }

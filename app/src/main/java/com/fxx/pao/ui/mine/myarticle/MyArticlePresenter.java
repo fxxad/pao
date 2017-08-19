@@ -15,26 +15,15 @@ import io.reactivex.schedulers.Schedulers;
  * Created by fxx on 2017/8/15 0015.
  */
 
-class MyArticlePresenter implements MyArticleContract.Presenter{
-
-    private MyArticleContract.View mView;
+class MyArticlePresenter extends MyArticleContract.Presenter {
 
     private int p;
 
-    @Override
-    public void setView(MyArticleContract.View view) {
-        mView = view;
-    }
-
-    @Override
-    public void removeView() {
-        mView = null;
-    }
 
     @Override
     public void myInitArticles() {
         p=0;
-        RetrofitHelper.createUserApi().myArticle(p)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().myArticle(p)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -47,12 +36,12 @@ class MyArticlePresenter implements MyArticleContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.getMyArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 
     @Override
     public void myMoreArticles() {
-        RetrofitHelper.createUserApi().myArticle(++p)
+        mCompositeDisposable.add(RetrofitHelper.createUserApi().myArticle(++p)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ArticleModel>() {
@@ -65,6 +54,6 @@ class MyArticlePresenter implements MyArticleContract.Presenter{
                     public void accept(Throwable t) throws Exception {
                         mView.getMyArticlesFail(NetErrorUtil.handleThrowable(t));
                     }
-                });
+                }));
     }
 }

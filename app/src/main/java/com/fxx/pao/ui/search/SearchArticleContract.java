@@ -1,6 +1,6 @@
 package com.fxx.pao.ui.search;
 
-import com.fxx.pao.base.BasePresenter;
+import com.fxx.pao.base.BaseRxPresenter;
 import com.fxx.pao.base.BaseView;
 import com.fxx.pao.model.ArticleModel;
 
@@ -18,9 +18,8 @@ interface SearchArticleContract {
         void onSearchArticlesFail(String msg);
 
     }
-    interface Presenter extends BasePresenter<SearchArticleContract.View>{
-        void getInitSearchArticles(String keyword);
-        void getMoreSearchArticles(String keyword);
-
+    abstract static class Presenter extends BaseRxPresenter<View> {
+        public abstract void getInitSearchArticles(String keyword);
+        public abstract void getMoreSearchArticles(String keyword);
     }
 }
