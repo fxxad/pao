@@ -32,7 +32,7 @@ interface ArticleListContract {
          */
         void loadArticlesFail(String msg);
     }
-    public abstract class Presenter extends BaseRxPresenter<View>{
+    abstract class Presenter extends BaseRxPresenter<View>{
         /**
          * 加载首页文章
          * @param tid 组id

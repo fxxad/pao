@@ -17,7 +17,7 @@ interface CollectionArticleContract {
         void appendCollectionArticles(List<CollectionModel.ItemsBean> itemsBeen);
         void getCollectionArticlesFail(String msg);
     }
-    abstract static class Presenter extends BaseRxPresenter<View> {
+    abstract class Presenter extends BaseRxPresenter<View> {
         public abstract void getMyCollectionArticles();
         public abstract void getMoreMyCollectionArticles();
     }

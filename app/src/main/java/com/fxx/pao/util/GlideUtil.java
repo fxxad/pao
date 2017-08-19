@@ -13,29 +13,24 @@ import com.fxx.pao.R;
 public class GlideUtil {
 
     @Deprecated
-    public static <T> DrawableTypeRequest<T> load(Context context, T model) {
-        return load(model);
+    public static <T> DrawableTypeRequest<T> load(Context context, T url) {
+        return load(url);
     }
 
     /**
      * 默认调用方法
      *
-     * @param model String, byte[], File, Integer, Uri
+     * @param url String, byte[], File, Integer, Uri
      * @param <T>
      * @return
      */
-    public static <T> DrawableTypeRequest<T> load(T model) {
-        return (DrawableTypeRequest<T>) Glide.with(PaoApp.getInstance()).load(model)
+    public static <T> DrawableTypeRequest<T> load(T url) {
+        return (DrawableTypeRequest<T>) Glide.with(PaoApp.getInstance()).load(url)
                 .error(R.drawable.nopic)
                 .dontAnimate();
     }
 
     //---------以下为扩展方法------------
-
-    @Deprecated
-    public static <T> DrawableTypeRequest<T> loadHeadImage(Context context, T model) {
-        return loadHeadImage(model);
-    }
 
 //    public static <T> DrawableTypeRequest<T> loadSplash(Context context, T model)
 //    {
@@ -47,12 +42,12 @@ public class GlideUtil {
     /**
      * 加载用户头像方法
      *
-     * @param model String, byte[], File, Integer, Uri
+     * @param url String, byte[], File, Integer, Uri
      * @param <T>
      * @return
      */
-    public static <T> DrawableTypeRequest<T> loadHeadImage(T model) {
-        return (DrawableTypeRequest<T>) load(model)
+    public static <T> DrawableTypeRequest<T> loadHeadImage(T url) {
+        return (DrawableTypeRequest<T>) load(url)
                 .placeholder(R.drawable.ic_default_head)
                 .error(R.drawable.ic_default_head)
                 .dontAnimate();
@@ -61,8 +56,8 @@ public class GlideUtil {
     /**
      * 加载通用图片
      */
-    public static <T> DrawableTypeRequest<T> loadDefaultImage(T model) {
-        return (DrawableTypeRequest<T>) load(model)
+    public static <T> DrawableTypeRequest<T> loadDefaultImage(T url) {
+        return (DrawableTypeRequest<T>) load(url)
                 .placeholder(R.drawable.ic_pic_loading)
                 .error(R.drawable.ic_pic_loadfail)
                 .dontAnimate();

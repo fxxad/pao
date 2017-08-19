@@ -37,7 +37,7 @@ interface CodeDetailContract {
         void stowFail(String msg);
 
     }
-    public abstract class Presener extends BaseRxPresenter<View> {
+    abstract class Presener extends BaseRxPresenter<View> {
         /**
          * 获取代码详情
          * @param codeId 代码id

@@ -30,7 +30,7 @@ interface CodeHomeContract {
          */
         void loadCodesFail(String msg);
     }
-    public abstract class Presenter extends BaseRxPresenter<View> {
+    abstract class Presenter extends BaseRxPresenter<View> {
         /**
          * 加载首屏代码数据
          */

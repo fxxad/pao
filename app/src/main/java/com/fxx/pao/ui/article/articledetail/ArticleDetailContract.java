@@ -34,7 +34,7 @@ interface ArticleDetailContract {
 
         void praiseFail(String msg);
     }
-    public abstract class Presenter extends BaseRxPresenter<View> {
+    abstract class Presenter extends BaseRxPresenter<View> {
         /**
          * 获取文章详情
          */

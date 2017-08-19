@@ -17,7 +17,7 @@ interface CommentContract {
         void onAppendComments(List<CommentModel.ItemsBean> items);
         void onGetCommentsFail(String errorMSg);
     }
-    public abstract class Presenter extends BaseRxPresenter<View> {
+    abstract class Presenter extends BaseRxPresenter<View> {
         abstract void loadInitComments(int id);
         abstract void loadMoreComments(int id);
     }

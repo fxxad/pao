@@ -17,7 +17,7 @@ interface MyArticleContract {
         void appendMyArticles(List<ArticleModel.ItemsBean> itemsBeen);
         void getMyArticlesFail(String msg);
     }
-    abstract static class Presenter extends BaseRxPresenter<View> {
+    abstract class Presenter extends BaseRxPresenter<View> {
         public abstract void myInitArticles();
         public abstract void myMoreArticles();
     }

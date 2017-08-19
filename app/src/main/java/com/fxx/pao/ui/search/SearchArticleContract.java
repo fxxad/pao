@@ -18,7 +18,7 @@ interface SearchArticleContract {
         void onSearchArticlesFail(String msg);
 
     }
-    abstract static class Presenter extends BaseRxPresenter<View> {
+    abstract class Presenter extends BaseRxPresenter<View> {
         public abstract void getInitSearchArticles(String keyword);
         public abstract void getMoreSearchArticles(String keyword);
     }

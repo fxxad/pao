@@ -14,7 +14,7 @@ interface LoginContract {
         void loginSuccess(BaseMsgModel msgModel);
         void loginFail(String errorMsg);
     }
-    public abstract class Presenter extends BaseRxPresenter<View> {
+    abstract class Presenter extends BaseRxPresenter<View> {
         abstract void login(String count, String pwd);
     }
 }
