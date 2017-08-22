@@ -110,7 +110,7 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
     public void onAppendComments(List<CommentModel.ItemsBean> items) {
         int oldSize = mItems.size();
         mItems.addAll(items);
-        mAdapter.notifyItemRangeChanged(oldSize,items.size());
+        mAdapter.notifyItemRangeInserted(oldSize,items.size());
         if(mSrl.isLoading())
             mSrl.finishLoadmore();
     }

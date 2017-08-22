@@ -100,7 +100,7 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
     public void appendArticles(List<ArticleModel.ItemsBean> itemsBeen) {
         int oldNum = mItems.size();
         mItems.addAll(itemsBeen);
-        mAdapter.notifyItemRangeChanged(oldNum,itemsBeen.size());
+        mAdapter.notifyItemRangeInserted(oldNum,itemsBeen.size());
         finishLoadMore();
     }
 

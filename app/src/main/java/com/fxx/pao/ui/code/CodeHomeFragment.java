@@ -112,7 +112,7 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
     public void appendCodeItems(List<CodeModel.ItemsBean> itemsBeen) {
         int oldSize=mItems.size();
         mItems.addAll(itemsBeen);
-        mAdapter.notifyItemRangeChanged(oldSize,itemsBeen.size());
+        mAdapter.notifyItemRangeInserted(oldSize,itemsBeen.size());
         finishLoadMore();
     }
     /**
