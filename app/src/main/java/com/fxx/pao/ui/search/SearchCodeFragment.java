@@ -72,7 +72,7 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
         mEtKeyword.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_UP) {
                     search();
                 }
                 return false;
