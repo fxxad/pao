@@ -3,6 +3,7 @@ package com.fxx.pao.ui.search;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -68,6 +69,15 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
         mSrl.setOnRefreshListener(this);
         mSrl.setOnLoadmoreListener(this);
 
+        mEtKeyword.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    search();
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -128,13 +138,7 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
     public void onClick(View view){
         switch (view.getId()){
             case R.id.iv_search:
-                mKeyword= mEtKeyword.getText().toString().trim();
-                if(mKeyword.equals("")){
-                    Toast.makeText(getContext(),"请输入关键字",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                mSrl.autoRefresh(0);
-                Util.hideInput(mEtKeyword);
+                search();
                 break;
             case R.id.iv_back:
                 getActivity().finish();
@@ -145,5 +149,18 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
     @Override
     public void onClick(int position) {
         CodeDetailActivity.start(getContext(),mItems.get(position).getId(),mItems.get(position).getTitle());
+    }
+
+    /**
+     * 搜索
+     */
+    private void search(){
+        mKeyword= mEtKeyword.getText().toString().trim();
+        if(mKeyword.equals("")){
+            Toast.makeText(getContext(),"请输入关键字",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mSrl.autoRefresh(0);
+        Util.hideInput(mEtKeyword);
     }
 }

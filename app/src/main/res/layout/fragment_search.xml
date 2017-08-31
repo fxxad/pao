@@ -25,6 +25,7 @@
                android:layout_height="wrap_content" />
 
            <EditText
+               android:imeOptions="actionSearch"
                android:layout_marginLeft="@dimen/activity_vertical_margin"
                android:background="@drawable/shape_search_bg"
                android:textSize="@dimen/search_keyword_size"
