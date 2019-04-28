@@ -17,6 +17,8 @@ import butterknife.BindView;
 
 /**
  * 收藏
+ *
+ * @author fxx
  */
 public class MyCollectionActivity extends BaseActivity {
 
@@ -27,8 +29,8 @@ public class MyCollectionActivity extends BaseActivity {
     @BindView(R.id.toolar_collection)
     Toolbar mToolbar;
 
-    public static void start(Context context){
-        Intent intent =new Intent(context,MyCollectionActivity.class);
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MyCollectionActivity.class);
         context.startActivity(intent);
     }
 
@@ -50,8 +52,9 @@ public class MyCollectionActivity extends BaseActivity {
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        if(getSupportActionBar()!=null)
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         CollectionVpAdapter mAdapter = new CollectionVpAdapter(getSupportFragmentManager(), this);
         mVpCollection.setAdapter(mAdapter);
@@ -65,9 +68,11 @@ public class MyCollectionActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+            default:
                 break;
         }
         return true;

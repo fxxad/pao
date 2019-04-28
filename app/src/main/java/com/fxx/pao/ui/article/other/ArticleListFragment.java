@@ -23,7 +23,9 @@ import butterknife.BindView;
 
 /**
  * 文章列表通用fragment
- * Created by fxx on 2017/8/10 0010.
+ *
+ * @author fxx
+ * @date 2017/8/10 0010
  */
 
 public class ArticleListFragment extends BaseFragment<ArticleListContract.Presenter> implements ArticleListContract.View, OnRefreshListener, OnLoadmoreListener, ArticleRvAdapter.ItemClickListener {
@@ -55,8 +57,9 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
+        if(mPresenter != null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -107,8 +110,9 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
     @Override
     public void loadArticlesFail(String msg) {
         Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
-        if(!finishRefresh())
+        if(!finishRefresh()) {
             finishLoadMore();
+        }
     }
 
     /**
@@ -128,8 +132,9 @@ public class ArticleListFragment extends BaseFragment<ArticleListContract.Presen
      * 结束加载更多动作
      */
     private void finishLoadMore(){
-        if(mSrl.isLoading())
+        if(mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override

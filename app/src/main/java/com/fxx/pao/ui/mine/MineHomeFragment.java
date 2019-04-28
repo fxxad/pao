@@ -27,7 +27,9 @@ import butterknife.OnClick;
 
 /**
  * 我的
- * Created by fxx on 2017/8/10 0010.
+ *
+ * @author fxx
+ * @date 2017/8/10 0010
  */
 
 public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements MineHomeContract.View {
@@ -45,7 +47,7 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
     @BindView(R.id.bt_logout)
     Button mBtLogout;
 
-    private boolean isLogin=false;
+    private boolean isLogin = false;
 
     @Override
     public MineHomePresenter getmPresenter() {
@@ -54,8 +56,9 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -91,37 +94,40 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.iv_head,R.id.tv_nick,R.id.rl_article,R.id.rl_collection,R.id.rl_msg,R.id.rl_set,
-    R.id.bt_logout})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.iv_head, R.id.tv_nick, R.id.rl_article, R.id.rl_collection, R.id.rl_msg, R.id.rl_set,
+            R.id.bt_logout})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_head:
             case R.id.tv_nick:
                 LoginActivity.start(getContext());
                 break;
             case R.id.rl_article:
-                if(isLogin){
+                if (isLogin) {
                     MyArticleActivity.start(getContext());
-                }else{
+                } else {
                     LoginActivity.start(getContext());
                 }
                 break;
             case R.id.rl_collection:
-                if(isLogin){
+                if (isLogin) {
                     MyCollectionActivity.start(getContext());
-                }else{
+                } else {
                     LoginActivity.start(getContext());
                 }
                 break;
             case R.id.rl_msg:
-               if(!isLogin)
-                   LoginActivity.start(getContext());
+                if (!isLogin) {
+                    LoginActivity.start(getContext());
+                }
                 break;
             case R.id.rl_set:
-                Toast.makeText(getContext(),"TODO",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "TODO", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bt_logout:
                 mPresenter.logOut();
+                break;
+            default:
                 break;
         }
     }
@@ -133,7 +139,7 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
 
     @Override
     public void getMyProfileFail(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -143,19 +149,20 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
 
     @Override
     public void logoutFailed(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     /**
-     *  初始化个人信息
+     * 初始化个人信息
+     *
      * @param myProfileModel 个人信息
      */
-    private void initMyProfile(MyProfileModel myProfileModel){
-        if(myProfileModel == null || myProfileModel.getModel() == null) {
+    private void initMyProfile(MyProfileModel myProfileModel) {
+        if (myProfileModel == null || myProfileModel.getModel() == null) {
             Toast.makeText(getContext(), "未登录或登录已过期", Toast.LENGTH_SHORT).show();
             return;
         }
-        isLogin =true;
+        isLogin = true;
         GlideUtil.loadHeadImage(myProfileModel.getModel().getFace()).into(mIvHead);
         mTvNick.setText(myProfileModel.getModel().getNickname());
         mTvSignature.setText(myProfileModel.getModel().getQianming());
@@ -167,8 +174,8 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
     /**
      * 清空个人信息
      */
-    private void clearMyProfile(){
-        isLogin =false;
+    private void clearMyProfile() {
+        isLogin = false;
         mIvHead.setImageResource(R.drawable.ic_default_head);
         mTvNick.setText(R.string.click_login);
         mTvSignature.setText(R.string.no_signature);
@@ -179,10 +186,11 @@ public class MineHomeFragment extends BaseFragment<MineHomePresenter> implements
 
     /**
      * 处理登录成功消息
+     *
      * @param loginSuccessEvent 消息
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMsgEvent(LoginSuccessEvent loginSuccessEvent){
+    public void onMsgEvent(LoginSuccessEvent loginSuccessEvent) {
         mPresenter.myProfile();
     }
 }

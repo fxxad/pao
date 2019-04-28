@@ -26,6 +26,8 @@
     <string name="logout">退出登录</string>
     <string name="no_signature">还没有签名哦</string>
     <string name="try_later">请稍后再试</string>
+    <string name="tip_input_keyword">请输入关键字</string>
+    <string name="tip_login_success">登录成功</string>
 
 
     <string-array name="article_titles">
@@ -52,5 +54,12 @@
         <item>文章</item>
         <item>代码</item>
     </string-array>
+
+
+    <!-- 错误提示-->
+    <string name="error_net_error">网络错误</string>
+    <string name="error_con_fail">连接失败</string>
+    <string name="error_parse_error">解析出错</string>
+    <string name="error_unknown">未知错误</string>
 
 </resources>

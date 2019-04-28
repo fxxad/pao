@@ -4,8 +4,6 @@ package com.fxx.pao.ui.search;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.LoginFilter;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -30,8 +28,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *  文章搜索fragment
- * Created by fxx on 2017/8/15 0015.
+ * 文章搜索fragment
+ *
+ * @author fxx
+ * @date 2017/8/15 0015
  */
 
 public class SearchArticleFragment extends BaseFragment<SearchArticlePresenter> implements SearchArticleContract.View, OnRefreshListener, OnLoadmoreListener, ArticleRvAdapter.ItemClickListener {
@@ -56,8 +56,9 @@ public class SearchArticleFragment extends BaseFragment<SearchArticlePresenter> 
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -68,7 +69,7 @@ public class SearchArticleFragment extends BaseFragment<SearchArticlePresenter> 
     @Override
     public void initView() {
         mRvArticles.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvArticles.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        mRvArticles.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         mSrl.setOnRefreshListener(this);
         mSrl.setOnLoadmoreListener(this);
@@ -102,40 +103,45 @@ public class SearchArticleFragment extends BaseFragment<SearchArticlePresenter> 
         mItems.clear();
         mItems.addAll(itemsBeen);
         mAdapter.notifyDataSetChanged();
-        if(mSrl.isRefreshing())
+        if (mSrl.isRefreshing()) {
             mSrl.finishRefresh();
+        }
     }
 
     @Override
     public void onLoadMoreSearchArticles(List<ArticleModel.ItemsBean> itemsBeen) {
         int oldSize = mItems.size();
         mItems.addAll(itemsBeen);
-        mAdapter.notifyItemRangeInserted(oldSize,itemsBeen.size());
-        if(mSrl.isLoading())
+        mAdapter.notifyItemRangeInserted(oldSize, itemsBeen.size());
+        if (mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override
     public void onSearchArticlesFail(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
 
-        if(mSrl.isRefreshing()) {
+        if (mSrl.isRefreshing()) {
             mSrl.finishRefresh();
             return;
         }
-        if(mSrl.isLoading())
+        if (mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
 
-    @OnClick({R.id.iv_search,R.id.iv_back})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.iv_search, R.id.iv_back})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_search:
                 search();
                 break;
             case R.id.iv_back:
                 getActivity().finish();
+                break;
+            default:
                 break;
         }
     }
@@ -152,7 +158,7 @@ public class SearchArticleFragment extends BaseFragment<SearchArticlePresenter> 
 
     @Override
     public void onClick(int position) {
-        ArticleDetailActivity.start(getContext(),mItems.get(position).getId(),
+        ArticleDetailActivity.start(getContext(), mItems.get(position).getId(),
                 mItems.get(position).getUser().getNickname(),
                 mItems.get(position).getUser().getFace());
     }
@@ -160,10 +166,10 @@ public class SearchArticleFragment extends BaseFragment<SearchArticlePresenter> 
     /**
      * 搜索
      */
-    private void search(){
-        mKeyword= mEtKeyword.getText().toString().trim();
-        if(mKeyword.equals("")){
-            Toast.makeText(getContext(),"请输入关键字",Toast.LENGTH_SHORT).show();
+    private void search() {
+        mKeyword = mEtKeyword.getText().toString().trim();
+        if ("".equals(mKeyword)) {
+            Toast.makeText(getContext(), R.string.tip_input_keyword, Toast.LENGTH_SHORT).show();
             return;
         }
         mSrl.autoRefresh(0);

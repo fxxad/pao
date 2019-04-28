@@ -26,6 +26,7 @@ import butterknife.BindView;
 /**
  * 评论页
  * Created by fxx on 2017/8/11
+ * @author fxx
  */
 public class CommentActivity extends BaseActivity<CommentPresenter> implements CommentContract.View, CommentRvAdapter.ItemClickListener, OnRefreshListener, OnLoadmoreListener {
 
@@ -53,8 +54,9 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
 
     @Override
     public void presenterSetView() {
-        if(mPresenter !=null)
+        if(mPresenter !=null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -93,6 +95,8 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
             case android.R.id.home:
                 finish();
                 break;
+                default:
+                    break;
         }
         return true;
     }
@@ -102,8 +106,9 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
         mItems.clear();
         mItems.addAll(items);
         mAdapter.notifyDataSetChanged();
-        if(mSrl.isRefreshing())
+        if(mSrl.isRefreshing()) {
             mSrl.finishRefresh();
+        }
     }
 
     @Override
@@ -111,8 +116,9 @@ public class CommentActivity extends BaseActivity<CommentPresenter> implements C
         int oldSize = mItems.size();
         mItems.addAll(items);
         mAdapter.notifyItemRangeInserted(oldSize,items.size());
-        if(mSrl.isLoading())
+        if(mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override

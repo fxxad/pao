@@ -9,7 +9,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 
 /**
  *
- * Created by RayYeung on 2016/7/11.
+ * ImageLoaderUtils
  */
 public class ImageLoaderUtils {
 

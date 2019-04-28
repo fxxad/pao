@@ -35,7 +35,9 @@ import butterknife.OnClick;
 
 /**
  * 代码
- * Created by fxx on 2017/8/10 0010.
+ *
+ * @author fxx
+ * @date 2017/8/10 0010
  */
 
 public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
@@ -76,7 +78,9 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null) mPresenter.setView(this);
+        if(mPresenter != null) {
+            mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -132,16 +136,18 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
      * 结束加载更多动作
      */
     private void finishLoadMore(){
-        if(mSrl.isLoading())
+        if(mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override
     public void loadCodesFail(String msg) {
         Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
 
-        if(!finishRefresh())
+        if(!finishRefresh()) {
             finishLoadMore();
+        }
     }
 
     @Override
@@ -161,10 +167,8 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
 
     @OnClick({R.id.iv_search_code})
     public void onClick(View view){
-        switch (view.getId()){
-            case R.id.iv_search_code:
-                SearchActivity.start(getContext(),SearchActivity.SEARCHTYPE_CODE);
-                break;
+        if (view.getId() == R.id.iv_search_code) {
+            SearchActivity.start(getContext(), SearchActivity.SEARCHTYPE_CODE);
         }
     }
 
@@ -175,8 +179,8 @@ public class CodeHomeFragment extends BaseFragment<CodeHomeContract.Presenter>
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleMsg(ScrollToStartEvent event){
         if(event.getCode() == ApiContants.TID_CODES){
-//        mRvCodes.smoothScrollToPosition(0);//这里滑动过程会比较长
-            if(mRvCodes.canScrollVertically(-1)){//不在顶部
+            if(mRvCodes.canScrollVertically(-1)){
+                //不在顶部
                 mRvCodes.scrollToPosition(0);
             }else{//已经滑动到顶部
                 mSrl.autoRefresh(0);

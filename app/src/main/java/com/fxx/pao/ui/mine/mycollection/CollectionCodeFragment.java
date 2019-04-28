@@ -22,7 +22,9 @@ import butterknife.BindView;
 
 /**
  *收藏code
- * Created by fxx on 2017/8/15 0015.
+ *
+ * @author fxx
+ * @date 2017/8/15 0015
  */
 
 public class CollectionCodeFragment extends BaseFragment<CollectionCodePresenter> implements CollectionCodeContract.View, OnRefreshListener, OnLoadmoreListener, CollectionRvAdapter.ItemClickListener {
@@ -42,8 +44,9 @@ public class CollectionCodeFragment extends BaseFragment<CollectionCodePresenter
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
+        if(mPresenter != null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -88,8 +91,9 @@ public class CollectionCodeFragment extends BaseFragment<CollectionCodePresenter
         mItems.clear();
         mItems.addAll(itemsBeen);
         mAdapter.notifyDataSetChanged();
-        if(mSrl.isRefreshing())
+        if(mSrl.isRefreshing()) {
             mSrl.finishRefresh();
+        }
     }
 
     @Override
@@ -97,8 +101,9 @@ public class CollectionCodeFragment extends BaseFragment<CollectionCodePresenter
         int oldSize = mItems.size();
         mItems.addAll(itemsBeen);
         mAdapter.notifyItemRangeInserted(oldSize,itemsBeen.size());
-        if(mSrl.isLoading())
+        if(mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override
@@ -108,8 +113,9 @@ public class CollectionCodeFragment extends BaseFragment<CollectionCodePresenter
             mSrl.finishRefresh();
             return;
         }
-        if(mSrl.isLoading())
+        if(mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override

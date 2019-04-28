@@ -27,8 +27,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *代码搜索fragment
- * Created by fxx on 2017/8/15 0015.
+ * 代码搜索fragment
+ *
+ * @author fxx
+ * @date 2017/8/15 0015
  */
 
 public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implements SearchCodeContract.View, OnRefreshListener, OnLoadmoreListener, CodeRvAdapter.ItemClickListener {
@@ -52,8 +54,9 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -64,7 +67,7 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
     @Override
     public void initView() {
         mRvCodes.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvCodes.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        mRvCodes.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         mSrl.setOnRefreshListener(this);
         mSrl.setOnLoadmoreListener(this);
@@ -82,7 +85,7 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
 
     @Override
     public void initData() {
-        mItems =new ArrayList<>();
+        mItems = new ArrayList<>();
         mAdapter = new CodeRvAdapter(mItems);
         mAdapter.setmItemClickListener(this);
         mRvCodes.setAdapter(mAdapter);
@@ -98,7 +101,7 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
         mItems.clear();
         mItems.addAll(itemsBeen);
         mAdapter.notifyDataSetChanged();
-        if(mSrl.isRefreshing()){
+        if (mSrl.isRefreshing()) {
             mSrl.finishRefresh();
         }
     }
@@ -107,20 +110,22 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
     public void onLoadMoreSearchCodes(List<CodeModel.ItemsBean> itemsBeen) {
         int oldSize = mItems.size();
         mItems.addAll(itemsBeen);
-        mAdapter.notifyItemRangeInserted(oldSize,itemsBeen.size());
-        if(mSrl.isLoading())
+        mAdapter.notifyItemRangeInserted(oldSize, itemsBeen.size());
+        if (mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override
     public void onSearchCodesFail(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
-        if(mSrl.isRefreshing()){
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        if (mSrl.isRefreshing()) {
             mSrl.finishRefresh();
             return;
         }
-        if(mSrl.isLoading())
+        if (mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
 
     }
 
@@ -134,30 +139,32 @@ public class SearchCodeFragment extends BaseFragment<SearchCodePresenter> implem
         mPresenter.getMoreSearchCodes(mKeyword);
     }
 
-    @OnClick({R.id.iv_search,R.id.iv_back})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.iv_search, R.id.iv_back})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.iv_search:
                 search();
                 break;
             case R.id.iv_back:
                 getActivity().finish();
                 break;
+            default:
+                break;
         }
     }
 
     @Override
     public void onClick(int position) {
-        CodeDetailActivity.start(getContext(),mItems.get(position).getId(),mItems.get(position).getTitle());
+        CodeDetailActivity.start(getContext(), mItems.get(position).getId(), mItems.get(position).getTitle());
     }
 
     /**
      * 搜索
      */
-    private void search(){
-        mKeyword= mEtKeyword.getText().toString().trim();
-        if(mKeyword.equals("")){
-            Toast.makeText(getContext(),"请输入关键字",Toast.LENGTH_SHORT).show();
+    private void search() {
+        mKeyword = mEtKeyword.getText().toString().trim();
+        if ("".equals(mKeyword)) {
+            Toast.makeText(getContext(), R.string.tip_input_keyword, Toast.LENGTH_SHORT).show();
             return;
         }
         mSrl.autoRefresh(0);

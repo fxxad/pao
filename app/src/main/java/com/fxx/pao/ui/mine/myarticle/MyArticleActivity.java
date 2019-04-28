@@ -14,6 +14,7 @@ import com.fxx.pao.R;
 import com.fxx.pao.adapter.ArticleRvAdapter;
 import com.fxx.pao.base.BaseActivity;
 import com.fxx.pao.model.ArticleModel;
+import com.fxx.pao.ui.article.articledetail.ArticleDetailActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -27,8 +28,9 @@ import butterknife.BindView;
 /**
  *我的文章
  * Created by fxx on 2017/8/11
+ * @author fxx
  */
-public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implements MyArticleContract.View, OnRefreshListener, OnLoadmoreListener {
+public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implements MyArticleContract.View, OnRefreshListener, OnLoadmoreListener, ArticleRvAdapter.ItemClickListener {
 
     @BindView(R.id.toolbar_my_article)
     Toolbar mToolbar;
@@ -54,8 +56,9 @@ public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implemen
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
+        if(mPresenter != null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -66,8 +69,9 @@ public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implemen
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        if(getSupportActionBar()!=null)
+        if(getSupportActionBar()!=null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         mSrl.setOnRefreshListener(this);
         mSrl.setOnLoadmoreListener(this);
@@ -81,6 +85,7 @@ public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implemen
     public void initData() {
         mItems = new ArrayList<>();
         mAdapter = new ArticleRvAdapter(mItems);
+        mAdapter.setmItemClickListener(this);
         mRvArticle.setAdapter(mAdapter);
         mSrl.autoRefresh(0);
     }
@@ -105,8 +110,9 @@ public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implemen
         }else{
             Toast.makeText(this,R.string.no_data,Toast.LENGTH_SHORT).show();
         }
-        if(mSrl.isRefreshing())
+        if(mSrl.isRefreshing()) {
             mSrl.finishRefresh();
+        }
     }
 
     @Override
@@ -131,7 +137,16 @@ public class MyArticleActivity extends BaseActivity<MyArticlePresenter> implemen
             case android.R.id.home:
                 finish();
                 break;
+                default:
+                    break;
         }
         return true;
+    }
+
+    @Override
+    public void onClick(int position) {
+        ArticleDetailActivity.start(MyArticleActivity.this,mItems.get(position).getId(),
+                mItems.get(position).getUser().getNickname(),
+                mItems.get(position).getUser().getFace());
     }
 }

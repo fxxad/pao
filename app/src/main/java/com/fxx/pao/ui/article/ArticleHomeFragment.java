@@ -17,7 +17,9 @@ import butterknife.OnClick;
 
 /**
  * 文章
- * Created by fxx on 2017/8/10 0010.
+ *
+ * @author fxx
+ * @date 2017/8/10 0010
  */
 
 public class ArticleHomeFragment extends BaseFragment{
@@ -30,8 +32,6 @@ public class ArticleHomeFragment extends BaseFragment{
     Toolbar mToolbar;
     @BindView(R.id.iv_search_article)
     ImageView mIvSearch;
-
-//    private ArticleHomeVpAdapter mAdaper;
 
 
     @Override
@@ -73,6 +73,8 @@ public class ArticleHomeFragment extends BaseFragment{
             case R.id.iv_search_article:
                 SearchActivity.start(getContext(),SearchActivity.SEARCHTYPE_ARTICLE);
                 break;
+                default:
+                    break;
         }
     }
 }

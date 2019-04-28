@@ -22,7 +22,9 @@ import butterknife.BindView;
 
 /**
  * 综合资讯
- * Created by fxx on 2017/8/10 0010.
+ *
+ * @author fxx
+ * @date 2017/8/10 0010
  */
 
 public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticleContract.Presenter>
@@ -46,8 +48,9 @@ public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticle
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
+        if(mPresenter != null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -100,8 +103,9 @@ public class SyntheticalArticleFragment extends BaseFragment<SyntheticallArticle
     @Override
     public void loadArticlesFail(String msg) {
         Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
-        if(!finishRefresh())
+        if(!finishRefresh()) {
             finishLoadMore();
+        }
     }
 
     /**

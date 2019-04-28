@@ -22,7 +22,9 @@ import butterknife.BindView;
 
 /**
  *收藏文章
- * Created by fx on 2017/8/15 0015.
+ *
+ * @author fx
+ * @date 2017/8/15 0015
  */
 
 public class CollectionArticleFragment extends BaseFragment<CollectionArticlePresenter> implements CollectionArticleContract.View, OnRefreshListener, OnLoadmoreListener, CollectionRvAdapter.ItemClickListener {
@@ -42,8 +44,9 @@ public class CollectionArticleFragment extends BaseFragment<CollectionArticlePre
 
     @Override
     public void presenterSetView() {
-        if(mPresenter!=null)
+        if(mPresenter!=null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
@@ -90,8 +93,9 @@ public class CollectionArticleFragment extends BaseFragment<CollectionArticlePre
             mItems.addAll(itemsBeen);
             mAdapter.notifyDataSetChanged();
         }
-        if(mSrl.isRefreshing())
+        if(mSrl.isRefreshing()) {
             mSrl.finishRefresh();
+        }
     }
 
     @Override
@@ -99,8 +103,9 @@ public class CollectionArticleFragment extends BaseFragment<CollectionArticlePre
         int oldSize = mItems.size();
         mItems.addAll(itemsBeen);
         mAdapter.notifyItemRangeInserted(oldSize,itemsBeen.size());
-        if(mSrl.isLoading())
+        if(mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override
@@ -110,8 +115,9 @@ public class CollectionArticleFragment extends BaseFragment<CollectionArticlePre
             mSrl.finishRefresh();
             return;
         }
-        if(mSrl.isLoading())
+        if(mSrl.isLoading()) {
             mSrl.finishLoadmore();
+        }
     }
 
     @Override

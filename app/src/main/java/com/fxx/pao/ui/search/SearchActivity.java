@@ -10,6 +10,7 @@ import com.fxx.pao.base.BasePresenter;
 
 /**
  * 搜索
+ * @author fxx
  */
 public class SearchActivity extends BaseActivity{
     public static final  int SEARCHTYPE_ARTICLE=0;

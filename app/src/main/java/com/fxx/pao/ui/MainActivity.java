@@ -24,6 +24,7 @@ import butterknife.BindView;
 
 /**
  * 主页
+ * @author fxx
  */
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
 
@@ -44,10 +45,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     }
 
     @Override
-    public void presenterSetView() {
-//        if(mPresenter != null)
-//            mPresenter.setView(this);
-    }
+    public void presenterSetView() {}
 
     @Override
     public void initView() {
@@ -111,8 +109,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         Fragment lastFg= mFgs.get(mLastFgIndex);
         mLastFgIndex = position;
         ft.hide(lastFg);
-        if(!targetFg.isAdded())
-            ft.add(R.id.container,targetFg);
+        if(!targetFg.isAdded()) {
+            ft.add(R.id.container, targetFg);
+        }
         ft.show(targetFg);
         ft.commitAllowingStateLoss();
     }

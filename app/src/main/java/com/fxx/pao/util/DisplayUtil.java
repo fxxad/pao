@@ -5,6 +5,7 @@ import android.util.DisplayMetrics;
 
 /**
  * 屏幕像素转换工具类
+ * @author fxx
  */
 public class DisplayUtil {
 

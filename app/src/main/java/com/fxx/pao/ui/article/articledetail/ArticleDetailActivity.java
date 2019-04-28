@@ -22,6 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 文章详情
+ * @author fxx
  */
 public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> implements ArticleDetailContract.View {
 
@@ -65,15 +66,17 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     @Override
     public void presenterSetView() {
-        if(mPresenter !=null)
+        if(mPresenter !=null) {
             mPresenter.setView(this);
+        }
     }
 
     @Override
     public void initView() {
         setSupportActionBar(mToolbar);
-        if(getSupportActionBar()!=null)
+        if(getSupportActionBar()!=null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -158,6 +161,8 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
             case android.R.id.home:
                 finish();
                 break;
+                default:
+                    break;
         }
         return true;
     }

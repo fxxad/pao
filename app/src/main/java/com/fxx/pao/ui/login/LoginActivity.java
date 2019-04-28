@@ -21,6 +21,7 @@ import butterknife.OnClick;
 /**
  * 登录
  * Created by fxx on 2017/8/11
+ * @author fxx
  */
 public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
 
@@ -75,10 +76,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void loginSuccess(BaseMsgModel msgModel) {
-        if(msgModel.getSucess() == 1){//登录成功
-            //通知minefragment刷新个人信息
+        if(msgModel.getSucess() == 1){
+            ////登录成功 通知minefragment刷新个人信息
             EventBus.getDefault().post(new LoginSuccessEvent());
-            Toast.makeText(this,"登录成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.tip_login_success,Toast.LENGTH_SHORT).show();
             finish();
         }else{
             Toast.makeText(this,msgModel.getMessage(),Toast.LENGTH_SHORT).show();
