@@ -3,6 +3,8 @@ package com.fxx.pao.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -31,6 +33,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     TextInputEditText mEtCount;
     @BindView(R.id.tiet_pwd)
     TextInputEditText mEtPwd;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     public static void start(Context context){
         Intent intent = new Intent(context,LoginActivity.class);
@@ -44,13 +48,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void presenterSetView() {
-        if(mPresenter != null)
-        mPresenter.setView(this);
+        if(mPresenter != null) {
+            mPresenter.setView(this);
+        }
     }
 
     @Override
     public void initView() {
-
+        setSupportActionBar(mToolbar);
+        if(getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -89,5 +97,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public void loginFail(String errorMsg) {
         Toast.makeText(this,errorMsg,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return true;
     }
 }
