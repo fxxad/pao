@@ -105,7 +105,7 @@ public class BannerView extends RelativeLayout
      */
     public void build(List<ArticleModel.ItemsBean> list) {
         destory();
-        if (list.size() == 0) {
+        if (list == null || list.size() == 0 ) {
             this.setVisibility(GONE);
             return;
         }

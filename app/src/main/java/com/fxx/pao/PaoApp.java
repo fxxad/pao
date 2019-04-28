@@ -42,9 +42,11 @@ public class PaoApp extends Application {
                 instance);
         config.memoryCacheExtraOptions(480, 800);
         config.diskCacheExtraOptions(480, 800, null);
-        config.diskCacheSize(100 * 1024 * 1024); // 100 MiB
+        // 100 MiB
+        config.diskCacheSize(100 * 1024 * 1024);
         if (BuildConfig.DEBUG) {
-            config.writeDebugLogs(); // Remove for release app
+            // Remove for release app
+            config.writeDebugLogs();
         }
         ImageLoader.getInstance().init(config.build());
     }
