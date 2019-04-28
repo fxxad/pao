@@ -28,6 +28,7 @@
     <string name="try_later">请稍后再试</string>
     <string name="tip_input_keyword">请输入关键字</string>
     <string name="tip_login_success">登录成功</string>
+    <string name="tip_todo">TODO</string>
 
 
     <string-array name="article_titles">

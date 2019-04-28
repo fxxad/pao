@@ -157,12 +157,8 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                finish();
-                break;
-                default:
-                    break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return true;
     }
@@ -179,6 +175,7 @@ public class ArticleDetailActivity extends BaseActivity<ArticleDetailPresenter> 
                 break;
             case R.id.iv_comment:
                 //TODO
+                Toast.makeText(this,R.string.tip_todo,Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_collection:
                 mPresenter.collect(mArticleId);
