@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 28
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.fxx.pao"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,13 +28,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:28.0.0'
     //
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
     //
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
     //
-//    compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
