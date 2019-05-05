@@ -15,6 +15,7 @@ public class PaoApp extends Application {
 
     //PaoApp实例
     private static PaoApp instance;
+    //修改测试1
 
     @Override
     public void onCreate() {
